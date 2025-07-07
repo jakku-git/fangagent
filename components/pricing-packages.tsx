@@ -67,7 +67,7 @@ export default function PricingPackages({ language }: PricingPackagesProps) {
             "WeChat Official Account Post (1st Position)",
             "2x Premium App Push Notifications",
             "3x REDBook Posts",
-            "REDBook & WeChat Chinese Walk-through Video",
+            "REDBook & WeChat Chinese Standard Video",
             "Dedicated Account Manager",
             "Maximum Reach",
             "Ongoing Support",
