@@ -105,12 +105,12 @@ export default function DistributionChannels({ language }: DistributionChannelsP
 
   return (
     <section ref={ref} className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-gray-50 to-white relative overflow-hidden">
-      <div className="flex-1 flex flex-col items-center justify-center w-full px-6 relative z-10 mx-auto">
+      <div className="flex-1 flex flex-col items-center justify-center w-full px-4 sm:px-6 relative z-10 mx-auto">
         <motion.h2
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
-          className="text-5xl md:text-7xl font-extrabold text-gray-900 mb-6 text-center tracking-tight drop-shadow-xl font-sans"
+          className="text-2xl sm:text-5xl md:text-7xl font-extrabold text-gray-900 mb-4 sm:mb-6 text-center tracking-tight drop-shadow-xl font-sans"
         >
           {content[language].title}
         </motion.h2>
@@ -118,31 +118,31 @@ export default function DistributionChannels({ language }: DistributionChannelsP
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-2xl text-gray-600 max-w-2xl mx-auto mb-10 text-center font-medium leading-relaxed drop-shadow-lg font-sans"
+          className="text-base sm:text-2xl text-gray-600 max-w-xl sm:max-w-2xl mx-auto mb-6 sm:mb-10 text-center font-medium leading-relaxed drop-shadow-lg font-sans"
         >
           {content[language].subtitle}
         </motion.p>
         {/* Central logo */}
         <motion.div
-          className="flex items-center justify-center mb-10"
+          className="flex items-center justify-center mb-6 sm:mb-10"
           animate={{ scale: [1, 1.08, 1] }}
           transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
         >
-          <img src="/hero.png" alt="Fang.com.au" className="w-28 h-28 rounded-full shadow-xl bg-white/80 p-2 object-contain" />
+          <img src="/hero.png" alt="Fang.com.au" className="w-20 h-20 sm:w-28 sm:h-28 rounded-full shadow-xl bg-white/80 p-2 object-contain" />
         </motion.div>
         {/* Two-column grid: left = problem/solution, right = channels */}
-        <div className="w-full max-w-6xl grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
+        <div className="w-full max-w-6xl grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 items-start">
           {/* Left: Problem & Solution */}
-          <div className="space-y-10">
+          <div className="space-y-6 sm:space-y-10">
             {/* The Problem */}
             <div>
-              <div className="flex items-center mb-4">
-                <span className="inline-flex items-center justify-center h-8 w-8 rounded-full bg-red-100 mr-3">
+              <div className="flex items-center mb-2 sm:mb-4">
+                <span className="inline-flex items-center justify-center h-6 w-6 sm:h-8 sm:w-8 rounded-full bg-red-100 mr-2 sm:mr-3">
                   <svg width="20" height="20" fill="none" viewBox="0 0 24 24"><path d="M12 9v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke="#ef4444" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
                 </span>
-                <h3 className="text-2xl font-bold text-gray-900">The Traditional Gap</h3>
+                <h3 className="text-lg sm:text-2xl font-bold text-gray-900">The Traditional Gap</h3>
               </div>
-              <ul className="space-y-4">
+              <ul className="space-y-2 sm:space-y-4">
                 {[
                   'English-only listings lose relevance and resonance',
                   'Traditional ads fail on trusted Chinese platforms like WeChat or REDBook',
@@ -163,11 +163,11 @@ export default function DistributionChannels({ language }: DistributionChannelsP
             </div>
             {/* Fang Solution */}
             <div>
-              <div className="flex items-center mb-4">
-                <img src="/hero.png" alt="Fang Solution" className="h-8 w-8 mr-3 rounded-full bg-blue-100 p-1" />
-                <h3 className="text-3xl font-extrabold text-gray-900 tracking-tight font-sans">FANG.COM.AU's Advantage</h3>
+              <div className="flex items-center mb-2 sm:mb-4">
+                <img src="/hero.png" alt="Fang Solution" className="h-6 w-6 sm:h-8 sm:w-8 mr-2 sm:mr-3 rounded-full bg-blue-100 p-1" />
+                <h3 className="text-xl sm:text-3xl font-extrabold text-gray-900 tracking-tight font-sans">FANG.COM.AU's Advantage</h3>
               </div>
-              <ul className="space-y-4">
+              <ul className="space-y-2 sm:space-y-4">
                 {[
                   'Native, culturally resonant Chinese content—never just translated, always localised',
                   'Syndicated reach across WeChat, REDBook, SydneyToday & UMall',
@@ -188,7 +188,7 @@ export default function DistributionChannels({ language }: DistributionChannelsP
             </div>
           </div>
           {/* Right: Channel cards */}
-          <div className="flex flex-col gap-8">
+          <div className="flex flex-col gap-4 sm:gap-8">
             {content[language].channels.slice(1).map((channel, i) => (
               <motion.div
                 key={channel.name}
@@ -196,7 +196,7 @@ export default function DistributionChannels({ language }: DistributionChannelsP
                 animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
                 transition={{ duration: 0.7, delay: 0.2 + i * 0.1 }}
                 whileHover={{ scale: 1.06, boxShadow: '0 8px 32px #3b82f633' }}
-                className="bg-white/60 backdrop-blur-md shadow-lg rounded-2xl p-6 flex flex-col items-center border border-gray-100 transition-all duration-300 w-full"
+                className="bg-white/60 backdrop-blur-md shadow-lg rounded-2xl p-4 sm:p-6 flex flex-col items-center border border-gray-100 transition-all duration-300 w-full"
               >
                 {channel.name === 'SydneyToday' ? (
                   <img src="/today.png" alt="SydneyToday" className="h-10 w-10 mb-3 object-contain" />

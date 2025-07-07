@@ -53,7 +53,7 @@ export default function FloatingCTA({ language }: FloatingCTAProps) {
         scale: isVisible ? 1 : 0,
       }}
       transition={{ duration: 0.3 }}
-      className="fixed bottom-6 right-6 z-50 flex flex-col space-y-3"
+      className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 flex flex-col space-y-2 sm:space-y-3"
     >
       {/* Main CTA Button */}
       <motion.div
@@ -68,7 +68,7 @@ export default function FloatingCTA({ language }: FloatingCTAProps) {
           ease: "easeInOut",
         }}
       >
-        <Button className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white shadow-2xl rounded-full px-6 py-3 font-semibold"
+        <Button className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white shadow-2xl rounded-full px-4 sm:px-6 py-2.5 sm:py-3 text-base sm:text-lg font-semibold"
           onClick={() => setDrawerOpen(true)}
         >
           <Phone className="mr-2 h-4 w-4" />
@@ -81,7 +81,7 @@ export default function FloatingCTA({ language }: FloatingCTAProps) {
         onClick={scrollToTop}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
-        className="bg-white/90 backdrop-blur-sm hover:bg-white text-gray-700 p-3 rounded-full shadow-lg border border-gray-200 transition-all duration-200"
+        className="bg-white/90 backdrop-blur-sm hover:bg-white text-gray-700 p-2.5 sm:p-3 rounded-full shadow-lg border border-gray-200 transition-all duration-200"
         title={content[language].backToTop}
       >
         <ArrowUp className="h-5 w-5" />

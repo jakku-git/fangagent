@@ -63,10 +63,10 @@ export default function Footer({ language }: FooterProps) {
   }
 
   return (
-    <footer ref={ref} className="bg-gray-900 text-white py-16">
-      <div className="max-w-7xl mx-auto px-6">
+    <footer ref={ref} className="bg-gray-900 text-white py-10 sm:py-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Main Footer Content */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-8 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 sm:gap-8 mb-8 sm:mb-12">
           {/* Brand Section */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -74,12 +74,12 @@ export default function Footer({ language }: FooterProps) {
             transition={{ duration: 0.8 }}
             className="lg:col-span-2"
           >
-            <motion.div whileHover={{ scale: 1.05 }} className="flex items-center mb-6">
-              <img src="/hero.png" alt="fang.com.au logo" className="h-16 w-16 mr-4" />
+            <motion.div whileHover={{ scale: 1.05 }} className="flex items-center mb-4 sm:mb-6">
+              <img src="/hero.png" alt="fang.com.au logo" className="h-10 w-10 sm:h-16 sm:w-16 mr-3 sm:mr-4" />
               <div className="flex flex-col leading-tight">
                 <span className="text-xs font-semibold text-blue-300 tracking-wide">华人找房</span>
-                <h3 className="text-3xl font-extrabold lowercase tracking-tight font-sans">fang.com.au</h3>
-                <p className="text-gray-400 text-sm">{content[language].tagline}</p>
+                <h3 className="text-lg sm:text-3xl font-extrabold lowercase tracking-tight font-sans">fang.com.au</h3>
+                <p className="text-gray-400 text-xs sm:text-sm">{content[language].tagline}</p>
               </div>
             </motion.div>
 
@@ -88,12 +88,12 @@ export default function Footer({ language }: FooterProps) {
               initial={{ opacity: 0, scale: 0.8 }}
               animate={isInView ? { opacity: 1, scale: 1 } : {}}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="bg-white p-4 rounded-lg inline-block"
+              className="bg-white p-2 sm:p-4 rounded-lg inline-block"
             >
-              <div className="w-24 h-24 bg-gray-200 rounded flex items-center justify-center overflow-hidden">
-                <img src="/fangwechat.png" alt="WeChat QR" className="h-20 w-20 object-contain" />
+              <div className="w-16 h-16 sm:w-24 sm:h-24 bg-gray-200 rounded flex items-center justify-center overflow-hidden">
+                <img src="/fangwechat.png" alt="WeChat QR" className="h-12 w-12 sm:h-20 sm:w-20 object-contain" />
               </div>
-              <p className="text-gray-900 text-xs text-center mt-2 font-medium">{content[language].wechat}</p>
+              <p className="text-gray-900 text-xs text-center mt-1 sm:mt-2 font-medium">{content[language].wechat}</p>
             </motion.div>
           </motion.div>
 
@@ -103,19 +103,19 @@ export default function Footer({ language }: FooterProps) {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.1 }}
           >
-            <h4 className="text-lg font-semibold mb-4 text-white">{content[language].contact.title}</h4>
-            <div className="space-y-3">
+            <h4 className="text-base sm:text-lg font-semibold mb-2 sm:mb-4 text-white">{content[language].contact.title}</h4>
+            <div className="space-y-2 sm:space-y-3">
               <div className="flex items-center">
-                <Mail className="h-4 w-4 mr-3 text-gray-400" />
-                <span className="text-sm text-gray-300">{content[language].contact.email}</span>
+                <Mail className="h-4 w-4 mr-2 sm:mr-3 text-gray-400" />
+                <span className="text-xs sm:text-sm text-gray-300">{content[language].contact.email}</span>
               </div>
               <div className="flex items-center">
-                <Phone className="h-4 w-4 mr-3 text-gray-400" />
-                <span className="text-sm text-gray-300">{content[language].contact.phone}</span>
+                <Phone className="h-4 w-4 mr-2 sm:mr-3 text-gray-400" />
+                <span className="text-xs sm:text-sm text-gray-300">{content[language].contact.phone}</span>
               </div>
               <div className="flex items-start">
-                <MapPin className="h-4 w-4 mr-3 text-gray-400 mt-1" />
-                <span className="text-sm text-gray-300">{content[language].contact.address}</span>
+                <MapPin className="h-4 w-4 mr-2 sm:mr-3 text-gray-400 mt-0.5 sm:mt-1" />
+                <span className="text-xs sm:text-sm text-gray-300">{content[language].contact.address}</span>
               </div>
             </div>
           </motion.div>
@@ -126,13 +126,13 @@ export default function Footer({ language }: FooterProps) {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <h4 className="text-lg font-semibold mb-4 text-white">{content[language].services.title}</h4>
-            <ul className="space-y-2">
+            <h4 className="text-base sm:text-lg font-semibold mb-2 sm:mb-4 text-white">{content[language].services.title}</h4>
+            <ul className="space-y-1 sm:space-y-2">
               {content[language].services.items.map((item, index) => (
                 <motion.li
                   key={index}
                   whileHover={{ x: 5 }}
-                  className="text-sm text-gray-300 hover:text-white cursor-pointer transition-colors duration-200"
+                  className="text-xs sm:text-sm text-gray-300 hover:text-white cursor-pointer transition-colors duration-200"
                 >
                   {item}
                 </motion.li>
@@ -146,13 +146,13 @@ export default function Footer({ language }: FooterProps) {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.3 }}
           >
-            <h4 className="text-lg font-semibold mb-4 text-white">{content[language].platforms.title}</h4>
-            <ul className="space-y-2">
+            <h4 className="text-base sm:text-lg font-semibold mb-2 sm:mb-4 text-white">{content[language].platforms.title}</h4>
+            <ul className="space-y-1 sm:space-y-2">
               {content[language].platforms.items.map((item, index) => (
                 <motion.li
                   key={index}
                   whileHover={{ x: 5 }}
-                  className="text-sm text-gray-300 hover:text-white cursor-pointer transition-colors duration-200"
+                  className="text-xs sm:text-sm text-gray-300 hover:text-white cursor-pointer transition-colors duration-200"
                 >
                   {item}
                 </motion.li>
@@ -166,17 +166,17 @@ export default function Footer({ language }: FooterProps) {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center"
+          className="border-t border-gray-800 pt-6 sm:pt-8 flex flex-col md:flex-row justify-between items-center"
         >
-          <p className="text-gray-400 text-sm mb-4 md:mb-0">{content[language].copyright}</p>
+          <p className="text-gray-400 text-xs sm:text-sm mb-2 sm:mb-4 md:mb-0 text-center">{content[language].copyright}</p>
 
-          <div className="flex space-x-6">
+          <div className="flex flex-wrap justify-center space-x-3 sm:space-x-6">
             {content[language].legal.items.map((item, index) => (
               <motion.a
                 key={index}
                 href="#"
                 whileHover={{ scale: 1.05 }}
-                className="text-sm text-gray-400 hover:text-white transition-colors duration-200"
+                className="text-xs sm:text-sm text-gray-400 hover:text-white transition-colors duration-200"
               >
                 {item}
               </motion.a>

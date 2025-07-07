@@ -196,7 +196,7 @@ export default function SuccessStories({ language }: SuccessStoriesProps) {
   // Helper: Render a testimonial card
   function TestimonialCard({ testimonial }: { testimonial: typeof testimonials[0] }) {
     return (
-      <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 relative drop-shadow-lg min-w-[320px] max-w-xs mx-4 flex-shrink-0">
+      <div className="bg-white rounded-2xl p-4 sm:p-8 shadow-lg border border-gray-100 relative drop-shadow-lg min-w-[240px] sm:min-w-[320px] max-w-xs mx-2 sm:mx-4 flex-shrink-0">
         {/* Stars */}
         <div className="flex mb-2">
           {[...Array(testimonial.rating)].map((_, starIndex) => (
@@ -204,12 +204,12 @@ export default function SuccessStories({ language }: SuccessStoriesProps) {
           ))}
         </div>
         {/* Quote */}
-        <blockquote className="text-gray-700 leading-relaxed mb-4 italic drop-shadow" style={{textShadow: '0 1px 6px rgba(0,0,0,0.10)'}}>
+        <blockquote className="text-gray-700 text-sm sm:text-base leading-relaxed mb-3 sm:mb-4 italic drop-shadow" style={{textShadow: '0 1px 6px rgba(0,0,0,0.10)'}}>
           "{testimonial.quote}"
         </blockquote>
         {/* Author */}
-        <div className="font-semibold text-gray-900 drop-shadow" style={{textShadow: '0 1px 6px rgba(0,0,0,0.10)'}}>{testimonial.author}</div>
-        <div className="text-sm text-gray-600 drop-shadow" style={{textShadow: '0 1px 6px rgba(0,0,0,0.10)'}}>{testimonial.role}</div>
+        <div className="font-semibold text-gray-900 text-xs sm:text-base drop-shadow" style={{textShadow: '0 1px 6px rgba(0,0,0,0.10)'}}>{testimonial.author}</div>
+        <div className="text-xs sm:text-sm text-gray-600 drop-shadow" style={{textShadow: '0 1px 6px rgba(0,0,0,0.10)'}}>{testimonial.role}</div>
       </div>
     );
   }
@@ -224,11 +224,11 @@ export default function SuccessStories({ language }: SuccessStoriesProps) {
   const loopTestimonials = [...filteredTestimonials, ...filteredTestimonials];
 
   return (
-    <section ref={ref} className="relative min-h-screen py-24 bg-gradient-to-b from-gray-50 to-white overflow-hidden">
+    <section ref={ref} className="relative min-h-screen py-16 sm:py-24 bg-gradient-to-b from-gray-50 to-white overflow-hidden">
       {/* Animated Partner Logos Background - Grid Fill */}
       <div className="absolute inset-0 w-full h-full pointer-events-none z-0">
         <div
-          className="w-full h-full grid grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-0.5 place-items-center opacity-30"
+          className="w-full h-full grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-0.5 place-items-center opacity-30"
           style={{ minHeight: '100%', minWidth: '100%' }}
         >
           {[
@@ -308,15 +308,15 @@ export default function SuccessStories({ language }: SuccessStoriesProps) {
       {/* Overlay for text readability */}
       <div className="absolute inset-0 z-10 pointer-events-none bg-white/30" />
       <div className="relative z-20 w-full px-0">
-        <div className="max-w-7xl mx-auto px-6">
+        <div className="max-w-7xl mx-auto px-2 sm:px-6">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8 }}
-            className="text-center mb-16"
+            className="text-center mb-8 sm:mb-16"
           >
-            <h2 className="text-5xl md:text-7xl font-extrabold text-gray-900 mb-6 tracking-tight drop-shadow-xl font-sans" style={{textShadow: '0 2px 8px rgba(0,0,0,0.18)'}}>{content[language].title}</h2>
-            <p className="text-2xl text-gray-700 max-w-3xl mx-auto font-medium leading-relaxed drop-shadow-lg font-sans" style={{textShadow: '0 1px 6px rgba(0,0,0,0.12)'}}>{content[language].subtitle}</p>
+            <h2 className="text-2xl sm:text-5xl md:text-7xl font-extrabold text-gray-900 mb-3 sm:mb-6 tracking-tight drop-shadow-xl font-sans" style={{textShadow: '0 2px 8px rgba(0,0,0,0.18)'}}>{content[language].title}</h2>
+            <p className="text-base sm:text-2xl text-gray-700 max-w-xs sm:max-w-3xl mx-auto font-medium leading-relaxed drop-shadow-lg font-sans" style={{textShadow: '0 1px 6px rgba(0,0,0,0.12)'}}>{content[language].subtitle}</p>
           </motion.div>
 
           {/* Agency Logos */}
@@ -324,7 +324,7 @@ export default function SuccessStories({ language }: SuccessStoriesProps) {
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="flex flex-wrap justify-center items-center gap-8 mb-16 opacity-60"
+            className="flex flex-wrap justify-center items-center gap-4 sm:gap-8 mb-8 sm:mb-16 opacity-60"
           >
             {content[language].agencies.map((agency, index) => (
               <motion.div
@@ -333,7 +333,7 @@ export default function SuccessStories({ language }: SuccessStoriesProps) {
                 animate={isInView ? { opacity: 1, scale: 1 } : {}}
                 transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
                 whileHover={{ scale: 1.1, opacity: 1 }}
-                className="bg-white px-6 py-3 rounded-lg shadow-sm border border-gray-200 font-semibold text-gray-700"
+                className="bg-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg shadow-sm border border-gray-200 font-semibold text-gray-700"
               >
                 {agency}
               </motion.div>
@@ -341,13 +341,13 @@ export default function SuccessStories({ language }: SuccessStoriesProps) {
           </motion.div>
 
           {/* Infinite Sliding Testimonials */}
-          <div className="space-y-8 my-16 w-full">
+          <div className="space-y-6 sm:space-y-8 my-8 sm:my-16 w-full">
             {/* Row 1: Left to Right */}
-            <div className="overflow-hidden w-full">
+            <div className="overflow-x-auto hide-scrollbar w-full">
               {mounted && (
                 <motion.div
                   className="flex"
-                  style={{ width: 'max-content' }}
+                  style={{ minWidth: '100%' }}
                   animate={{ x: [0, filteredTestimonials.length * -340] }}
                   transition={{
                     repeat: Infinity,
@@ -363,11 +363,11 @@ export default function SuccessStories({ language }: SuccessStoriesProps) {
               )}
             </div>
             {/* Row 2: Right to Left */}
-            <div className="overflow-hidden w-full">
+            <div className="overflow-x-auto hide-scrollbar w-full">
               {mounted && (
                 <motion.div
                   className="flex"
-                  style={{ width: 'max-content' }}
+                  style={{ minWidth: '100%' }}
                   animate={{ x: [filteredTestimonials.length * -340, 0] }}
                   transition={{
                     repeat: Infinity,

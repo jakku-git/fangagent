@@ -122,3 +122,12 @@ html {
 .logo-colored {
   filter: grayscale(0) !important;
 }
+
+/* Hide scrollbar for elements with .hide-scrollbar */
+.hide-scrollbar {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* IE and Edge */
+}
+.hide-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}

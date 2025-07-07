@@ -1,7 +1,8 @@
 {
-  "name": "my-v0-project",
-  "version": "0.1.0",
+  "name": "fang-com-au",
+  "version": "1.0.0",
   "private": true,
+  "description": "Fang.com.au: Reach Chinese buyers directly. List your property, access Australia's largest Chinese real estate audience, and maximize your exposure across WeChat, Xiaohongshu, SydneyToday, and more.",
   "scripts": {
     "build": "next build",
     "dev": "next dev",

@@ -152,19 +152,19 @@ export default function AudienceInsights({ language }: AudienceInsightsProps) {
   }, [isInView])
 
   return (
-    <section ref={ref} className="py-24 bg-gradient-to-br from-blue-900 via-blue-800 to-blue-900 text-white">
-      <div className="max-w-7xl mx-auto px-6">
+    <section ref={ref} className="py-16 sm:py-24 bg-gradient-to-br from-blue-900 via-blue-800 to-blue-900 text-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
-          className="text-center mb-16"
+          className="text-center mb-10 sm:mb-16"
         >
-          <h2 className="text-5xl md:text-7xl font-extrabold mb-6 tracking-tight drop-shadow-xl font-sans">{content[language].title}</h2>
-          <p className="text-2xl text-blue-100 max-w-3xl mx-auto font-medium leading-relaxed drop-shadow-lg font-sans">{content[language].subtitle}</p>
+          <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-7xl font-extrabold mb-4 sm:mb-6 tracking-tight drop-shadow-xl font-sans">{content[language].title}</h2>
+          <p className="text-base sm:text-2xl text-blue-100 max-w-xl sm:max-w-3xl mx-auto font-medium leading-relaxed drop-shadow-lg font-sans">{content[language].subtitle}</p>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-8 items-stretch">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 items-stretch">
           {content[language].stats.map((stat, index) => (
             <motion.div
               key={index}
@@ -172,20 +172,20 @@ export default function AudienceInsights({ language }: AudienceInsightsProps) {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.8, delay: index * 0.2 }}
               whileHover={{ scale: 1.05 }}
-              className="text-center group flex-1 min-h-[370px] flex flex-col justify-between"
+              className="text-center group flex-1 min-h-[260px] sm:min-h-[370px] flex flex-col justify-between"
             >
-              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20 hover:bg-white/15 transition-all duration-300 h-full flex flex-col justify-between">
+              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 sm:p-8 border border-white/20 hover:bg-white/15 transition-all duration-300 h-full flex flex-col justify-between">
                 <motion.div
                   initial={{ scale: 0 }}
                   animate={isInView ? { scale: 1 } : {}}
                   transition={{ duration: 0.5, delay: index * 0.2 + 0.3 }}
-                  className="bg-gradient-to-r from-white/80 to-white p-4 rounded-full w-16 h-16 mx-auto mb-6 flex items-center justify-center group-hover:scale-110 transition-transform duration-300"
+                  className="bg-gradient-to-r from-white/80 to-white p-3 sm:p-4 rounded-full w-12 sm:w-16 h-12 sm:h-16 mx-auto mb-4 sm:mb-6 flex items-center justify-center group-hover:scale-110 transition-transform duration-300"
                 >
-                  <stat.icon className="h-8 w-8 text-blue-900" />
+                  <stat.icon className="h-6 w-6 sm:h-8 sm:w-8 text-blue-900" />
                 </motion.div>
 
                 <motion.div
-                  className="text-4xl md:text-5xl font-bold mb-2 bg-gradient-to-r from-white/90 to-white bg-clip-text text-transparent"
+                  className="text-2xl sm:text-4xl md:text-5xl font-bold mb-1 sm:mb-2 bg-gradient-to-r from-white/90 to-white bg-clip-text text-transparent"
                   initial={{ opacity: 0 }}
                   animate={isInView ? { opacity: 1 } : {}}
                   transition={{ duration: 0.8, delay: index * 0.2 + 0.5 }}
@@ -200,10 +200,8 @@ export default function AudienceInsights({ language }: AudienceInsightsProps) {
                         ? `${readyToBuy}%`
                         : stat.value}
                 </motion.div>
-
-                <h3 className="text-xl font-semibold mb-3 text-white">{stat.label}</h3>
-
-                <p className="text-blue-100 leading-relaxed">{stat.description}</p>
+                <div className="text-xs sm:text-base font-semibold mb-1 sm:mb-2">{stat.label}</div>
+                <div className="text-xs sm:text-sm text-blue-100/80">{stat.description}</div>
 
                 {/* Progress Bar */}
                 <motion.div

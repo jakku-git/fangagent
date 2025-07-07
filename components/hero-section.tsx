@@ -59,7 +59,7 @@ export default function HeroSection({ language }: HeroSectionProps) {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-blue-900 via-blue-800 to-blue-900">
+    <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-gradient-to-br from-blue-900 via-blue-800 to-blue-900">
       {/* Background Video */}
       <video
         autoPlay
@@ -72,18 +72,17 @@ export default function HeroSection({ language }: HeroSectionProps) {
       {/* Background Overlays and Floating UI Elements */}
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-gradient-to-r from-blue-900/30 to-blue-800/20 z-10" />
-        {/* Floating UI Elements removed */}
       </div>
 
       {/* Content */}
-      <div className="relative z-20 text-center max-w-6xl mx-auto px-6">
+      <div className="relative z-20 text-center max-w-6xl mx-auto px-4 sm:px-6 md:px-8">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: "easeOut" }}
         >
           <motion.h1
-            className="text-6xl md:text-8xl font-extrabold text-white mb-8 leading-tight tracking-tight drop-shadow-xl font-sans"
+            className="text-3xl sm:text-5xl md:text-6xl lg:text-8xl font-extrabold text-white mb-6 sm:mb-8 leading-tight tracking-tight drop-shadow-xl font-sans"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.2 }}
@@ -92,7 +91,7 @@ export default function HeroSection({ language }: HeroSectionProps) {
           </motion.h1>
 
           <motion.p
-            className="text-2xl md:text-3xl text-blue-100 mb-14 max-w-4xl mx-auto leading-relaxed font-medium tracking-tight drop-shadow-lg font-sans"
+            className="text-lg sm:text-2xl md:text-3xl text-blue-100 mb-8 sm:mb-14 max-w-2xl sm:max-w-4xl mx-auto leading-relaxed font-medium tracking-tight drop-shadow-lg font-sans"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.4 }}
@@ -101,7 +100,7 @@ export default function HeroSection({ language }: HeroSectionProps) {
           </motion.p>
 
           <motion.div
-            className="flex flex-col sm:flex-row gap-8 justify-center items-center"
+            className="flex flex-col sm:flex-row gap-4 sm:gap-8 justify-center items-center"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.6 }}
@@ -109,7 +108,7 @@ export default function HeroSection({ language }: HeroSectionProps) {
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Button
                 size="lg"
-                className="bg-gradient-to-r from-white to-white hover:from-white hover:to-white text-blue-900 font-bold px-10 py-5 text-xl rounded-full shadow-2xl tracking-tight font-sans"
+                className="bg-gradient-to-r from-white to-white hover:from-white hover:to-white text-blue-900 font-bold px-6 sm:px-10 py-4 sm:py-5 text-base sm:text-xl rounded-full shadow-2xl tracking-tight font-sans"
                 onClick={() => {
                   const el = document.getElementById('pricing-packages');
                   if (el) {
@@ -126,7 +125,7 @@ export default function HeroSection({ language }: HeroSectionProps) {
               <Button
                 variant="outline"
                 size="lg"
-                className="border-2 border-white text-white hover:bg-white hover:text-blue-900 font-bold px-10 py-5 text-xl rounded-full backdrop-blur-sm bg-transparent tracking-tight font-sans"
+                className="border-2 border-white text-white hover:bg-white hover:text-blue-900 font-bold px-6 sm:px-10 py-4 sm:py-5 text-base sm:text-xl rounded-full backdrop-blur-sm bg-transparent tracking-tight font-sans"
                 onClick={() => setDrawerOpen(true)}
               >
                 <Play className="mr-2 h-5 w-5" />
@@ -138,9 +137,9 @@ export default function HeroSection({ language }: HeroSectionProps) {
       </div>
 
       {/* Infinite Scrolling Logo Strip */}
-      <div className="absolute left-0 right-0 bottom-0 z-30 overflow-hidden select-none">
+      <div className="absolute left-0 right-0 bottom-0 z-30 overflow-x-auto hide-scrollbar select-none pb-2 sm:pb-0">
         <motion.div
-          className="flex gap-12 w-max"
+          className="flex gap-8 sm:gap-12 w-max"
           style={{ minWidth: '100vw' }}
           animate={{ x: [0, -700] }}
           transition={{ duration: 18, repeat: Infinity, ease: 'linear' }}
@@ -150,9 +149,9 @@ export default function HeroSection({ language }: HeroSectionProps) {
               key={idx}
               src={`/logoscroll/${num}.svg`}
               alt={`Logo ${num}`}
-              className={`h-56 w-auto opacity-80 logo-greyscale${coloredIndexes.includes(idx) ? ' logo-colored' : ''}`}
+              className={`h-20 sm:h-32 md:h-56 w-auto opacity-80 logo-greyscale${coloredIndexes.includes(idx) ? ' logo-colored' : ''}`}
               draggable={false}
-              style={{ minWidth: 320 }}
+              style={{ minWidth: 120 }}
             />
           ))}
         </motion.div>
@@ -160,13 +159,13 @@ export default function HeroSection({ language }: HeroSectionProps) {
 
       {/* Scroll Indicator */}
       <motion.div
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+        className="absolute bottom-4 sm:bottom-8 left-1/2 transform -translate-x-1/2"
         animate={{ y: [0, 10, 0] }}
         transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
       >
-        <div className="w-6 h-10 border-2 border-white/50 rounded-full flex justify-center">
+        <div className="w-5 h-8 sm:w-6 sm:h-10 border-2 border-white/50 rounded-full flex justify-center">
           <motion.div
-            className="w-1 h-3 bg-white/70 rounded-full mt-2"
+            className="w-1 h-2 sm:h-3 bg-white/70 rounded-full mt-2"
             animate={{ y: [0, 12, 0] }}
             transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
           />
