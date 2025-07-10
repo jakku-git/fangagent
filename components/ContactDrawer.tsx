@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { X, CheckCircle2 } from "lucide-react";
 import React, { useEffect, useRef, useState } from "react";
+import emailjs from 'emailjs-com';
 
 interface ContactDrawerProps {
   open: boolean;
@@ -17,6 +18,7 @@ export default function ContactDrawer({ open, onClose }: ContactDrawerProps) {
     message: "",
   });
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   // Close on ESC
   useEffect(() => {
@@ -39,14 +41,32 @@ export default function ContactDrawer({ open, onClose }: ContactDrawerProps) {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => {
-      setSubmitted(false);
-      setForm({ name: "", email: "", agency: "", phone: "", message: "" });
-      onClose();
-    }, 2000);
+    setError(null);
+    emailjs.send(
+      'service_ktws6ic',
+      'template_bv7ptpn',
+      {
+        name: form.name,
+        email: form.email,
+        agency: form.agency,
+        phone: form.phone,
+        message: form.message,
+      },
+      'BVXzsppHII8mXgHwc'
+    )
+    .then(() => {
+      setSubmitted(true);
+      setTimeout(() => {
+        setSubmitted(false);
+        setForm({ name: '', email: '', agency: '', phone: '', message: '' });
+        onClose();
+      }, 2000);
+    })
+    .catch(() => {
+      setError('Failed to send. Please try again.');
+    });
   };
 
   return (
@@ -90,12 +110,15 @@ export default function ContactDrawer({ open, onClose }: ContactDrawerProps) {
                 </div>
               ) : (
                 <form className="w-full flex flex-col gap-3 sm:gap-6" onSubmit={handleSubmit} autoComplete="off">
+                  {error && (
+                    <div className="text-red-600 text-center font-semibold mb-2">{error}</div>
+                  )}
                   {/* Floating label input */}
                   {[
                     { name: "name", type: "text", label: "Full Name", required: true },
                     { name: "email", type: "email", label: "Email Address", required: true },
-                    { name: "agency", type: "text", label: "Agency Name (optional)", required: false },
-                    { name: "phone", type: "tel", label: "Phone Number (optional)", required: false },
+                    { name: "agency", type: "text", label: "Agency Name", required: true },
+                    { name: "phone", type: "tel", label: "Phone Number", required: true },
                   ].map((field) => (
                     <div key={field.name} className="relative">
                       <input
@@ -127,6 +150,7 @@ export default function ContactDrawer({ open, onClose }: ContactDrawerProps) {
                       value={form.message}
                       onChange={handleChange}
                       id="contact-message"
+                      required
                     />
                     <label
                       htmlFor="contact-message"
