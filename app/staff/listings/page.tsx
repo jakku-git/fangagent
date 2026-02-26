@@ -24,29 +24,18 @@ export default function StaffListingsPage() {
 
   useEffect(() => {
     async function load() {
-      // Fetch listings with profile data (includes phone)
+      // Fetch listings with profile data (email now stored in profiles)
       const { data } = await supabase
         .from("listings")
-        .select("*, profiles(full_name, agency_name, phone)")
+        .select("*, profiles(full_name, agency_name, phone, email)")
         .order("created_at", { ascending: false });
 
       if (!data) { setLoading(false); return; }
 
-      // Fetch agent emails in bulk via our API
-      const agentIds = [...new Set(data.map((l) => l.agent_id))];
       const emailMap: Record<string, string> = {};
-
-      await Promise.all(
-        agentIds.map(async (id) => {
-          try {
-            const res = await fetch(`/api/staff/agent?agentId=${id}`);
-            const json = await res.json();
-            emailMap[id] = json.email ?? "";
-          } catch {
-            emailMap[id] = "";
-          }
-        })
-      );
+      data.forEach((l) => {
+        if (l.profiles?.email) emailMap[l.agent_id] = l.profiles.email;
+      });
 
       const enriched: ListingWithEmail[] = data.map((l) => ({
         ...(l as Listing),

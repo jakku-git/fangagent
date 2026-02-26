@@ -4,6 +4,7 @@ export interface Profile {
   id: string;
   role: "agent" | "staff";
   account_type: "agent" | "agency";
+  email: string | null;
   full_name: string | null;
   agency_name: string | null;
   phone: string | null;

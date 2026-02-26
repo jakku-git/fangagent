@@ -39,6 +39,7 @@ export async function POST(req: NextRequest) {
       .from("profiles")
       .update({
         role,
+        email,
         account_type: isStaff ? "agent" : accountType,
         full_name: fullName,
         agency_name: agencyName,

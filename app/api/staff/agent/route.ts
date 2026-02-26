@@ -6,6 +6,10 @@ export async function GET(req: NextRequest) {
     const agentId = req.nextUrl.searchParams.get("agentId");
     if (!agentId) return NextResponse.json({ error: "Missing agentId" }, { status: 400 });
     const supabase = createServiceClient();
+    // Use email stored in profiles (fast, no admin API needed)
+    const { data: profile } = await supabase.from("profiles").select("email").eq("id", agentId).single();
+    if (profile?.email) return NextResponse.json({ email: profile.email });
+    // Fallback to auth admin if profile email not yet populated
     const { data } = await supabase.auth.admin.getUserById(agentId);
     return NextResponse.json({ email: data?.user?.email ?? "" });
   } catch {

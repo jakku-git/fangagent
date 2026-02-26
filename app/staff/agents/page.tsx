@@ -25,18 +25,15 @@ export default function StaffAgentsPage() {
       .order("created_at", { ascending: false })
       .then(async ({ data: profiles }) => {
         if (!profiles) return;
-        // Enrich with listing counts and emails
         const enriched = await Promise.all(
           profiles.map(async (p) => {
-            const [{ count: listingCount }, { data: invoiceData }, { data: authUser }] = await Promise.all([
+            const [{ count: listingCount }, { data: invoiceData }] = await Promise.all([
               supabase.from("listings").select("id", { count: "exact", head: true }).eq("agent_id", p.id),
               supabase.from("invoices").select("amount").eq("agent_id", p.id).eq("status", "paid"),
-              supabase.auth.admin.getUserById(p.id).catch(() => ({ data: { user: null } })),
             ]);
             const totalSpend = (invoiceData ?? []).reduce((s, i) => s + i.amount, 0);
             return {
               ...p,
-              email: (authUser as { data: { user: { email?: string } | null } })?.data?.user?.email ?? "",
               listing_count: listingCount ?? 0,
               total_spend: totalSpend,
             };

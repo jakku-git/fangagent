@@ -13,7 +13,6 @@ export default function StaffAgentDetailPage({ params }: { params: Promise<{ id:
   const supabase = createClient();
 
   const [profile, setProfile] = useState<Profile | null>(null);
-  const [agentEmail, setAgentEmail] = useState("");
   const [listings, setListings] = useState<Listing[]>([]);
   const [invoices, setInvoices] = useState<Invoice[]>([]);
   const [accountStatus, setAccountStatus] = useState<Profile["account_status"]>("active");
@@ -41,13 +40,6 @@ export default function StaffAgentDetailPage({ params }: { params: Promise<{ id:
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
-  // Get email from auth (best effort)
-  useEffect(() => {
-    fetch(`/api/staff/agent?agentId=${id}`)
-      .then((r) => r.json())
-      .then((d) => { if (d.email) setAgentEmail(d.email); })
-      .catch(() => {});
-  }, [id]);
 
   const totalSpend = invoices.filter((i) => i.status === "paid").reduce((sum, i) => sum + i.amount, 0);
 
@@ -85,11 +77,11 @@ export default function StaffAgentDetailPage({ params }: { params: Promise<{ id:
 
         <div className="mb-8 flex items-start gap-5">
           <div className="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-full bg-foreground text-background text-xl font-medium">
-            {(profile.full_name ?? agentEmail ?? "?").charAt(0).toUpperCase()}
+            {(profile.full_name ?? profile.email ?? "?").charAt(0).toUpperCase()}
           </div>
           <div>
-            <h1 className="text-xl font-medium text-foreground">{profile.full_name ?? agentEmail}</h1>
-            <p className="text-sm text-muted-foreground">{profile.agency_name ?? "—"} · {agentEmail}</p>
+            <h1 className="text-xl font-medium text-foreground">{profile.full_name ?? profile.email}</h1>
+            <p className="text-sm text-muted-foreground">{profile.agency_name ?? "—"} · {profile.email}</p>
             <p className="text-xs text-muted-foreground mt-1">Joined {profile.created_at.slice(0, 10)} · Licence {profile.licence_number ?? "—"}</p>
           </div>
         </div>
@@ -236,7 +228,7 @@ export default function StaffAgentDetailPage({ params }: { params: Promise<{ id:
               <p className="text-xs uppercase tracking-widest text-muted-foreground mb-3">Contact</p>
               <div className="space-y-2 text-xs text-muted-foreground">
                 <p>{profile.phone ?? "—"}</p>
-                <p>{agentEmail}</p>
+                <p>{profile.email ?? "—"}</p>
                 <p>{profile.address ? `${profile.address}, ${profile.suburb} ${profile.state}` : "—"}</p>
                 {profile.website && <a href={profile.website} target="_blank" rel="noopener noreferrer" className="text-foreground underline underline-offset-2">{profile.website}</a>}
               </div>
