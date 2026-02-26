@@ -22,7 +22,7 @@ const faqs = [
       },
       {
         q: "Which areas does Fang cover?",
-        a: "We cover all NSW metropolitan areas, with strong coverage across Greater Sydney. Our social media network (REDNote and WeChat) reaches a national and international Chinese audience.",
+        a: "Our primary focus is NSW metropolitan areas, with particularly strong coverage across Greater Sydney. Through our REDNote and WeChat channels, that reach extends nationally — and internationally — to the broader Chinese-speaking audience wherever they are.",
       },
     ],
   },

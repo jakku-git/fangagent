@@ -215,7 +215,7 @@ export default function MediaKitPage() {
         <div className="mx-auto grid max-w-6xl grid-cols-2 divide-x divide-background/10 md:grid-cols-4">
           {[
             { value: "3.5M", label: "Total Network Reach" },
-            { value: "1.4M", label: "Fang Registered Members" },
+            { value: "1.4M", label: "Registered Members" },
             { value: "1.2M", label: "WeChat Followers" },
             { value: "60K+", label: "Daily News Readers" },
           ].map((stat) => (
