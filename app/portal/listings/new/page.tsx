@@ -11,19 +11,19 @@ import { Upload, CheckCircle, Plus, X } from "lucide-react";
 const packages: { name: PackageName; price: number; tagline: string; includes: string[] }[] = [
   {
     name: "Essential",
-    price: 425,
+    price: 475,
     tagline: "Get found where Chinese buyers search.",
     includes: ["Listed on fang.com.au web & app", "Full Chinese translation", "Content localised for Chinese buyers", "Suburb data, school rankings & auction results", "Performance report via email"],
   },
   {
     name: "Premium",
-    price: 750,
+    price: 880,
     tagline: "Put your listing in front of millions.",
     includes: ["Everything in Essential", "Image posts on REDNote (小红书)", "Published across 10–12 verified REDNote accounts", "WeChat Official Account post — 1.2M reach", "Chinese-localised captions and content"],
   },
   {
     name: "Premium+",
-    price: 1250,
+    price: 1650,
     tagline: "The most powerful way to reach Chinese buyers.",
     includes: ["Everything in Premium", "Professional video production", "Chinese-language voiceover or subtitles", "Published as video posts on REDNote & WeChat", "WeChat Video Channel distribution"],
   },

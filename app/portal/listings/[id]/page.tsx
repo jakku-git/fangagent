@@ -197,7 +197,7 @@ export default function ListingDetailPage({ params }: { params: Promise<{ id: st
                       className="flex items-center justify-between rounded-lg border border-border px-4 py-3 text-sm transition-colors hover:bg-zinc-50">
                       <div className="flex items-center gap-3">
                         <div className="h-6 w-6 rounded-lg overflow-hidden flex-shrink-0">
-                          <Image src="/fangapplogo.png" alt="Fang" width={24} height={24} className="h-6 w-6 object-cover" />
+                          <Image src="/media/images/fangapplogo.webp" alt="Fang" width={24} height={24} className="h-6 w-6 object-cover" />
                         </div>
                         <span className="font-medium text-foreground">Fang Portal</span>
                       </div>
@@ -212,7 +212,7 @@ export default function ListingDetailPage({ params }: { params: Promise<{ id: st
                       className="flex items-center justify-between rounded-lg border border-border px-4 py-3 text-sm transition-colors hover:bg-zinc-50">
                       <div className="flex items-center gap-3">
                         <div className="h-6 w-6 rounded-lg overflow-hidden flex-shrink-0">
-                          <Image src="/images/redbook.png" alt="REDNote" width={24} height={24} className="h-6 w-6 object-cover" />
+                          <Image src="/media/images/redbook.webp" alt="REDNote" width={24} height={24} className="h-6 w-6 object-cover" />
                         </div>
                         <span className="font-medium text-foreground">REDNote Post</span>
                       </div>
@@ -227,7 +227,7 @@ export default function ListingDetailPage({ params }: { params: Promise<{ id: st
                       className="flex items-center justify-between rounded-lg border border-border px-4 py-3 text-sm transition-colors hover:bg-zinc-50">
                       <div className="flex items-center gap-3">
                         <div className="h-6 w-6 rounded-lg overflow-hidden flex-shrink-0">
-                          <Image src="/images/wechat.png" alt="WeChat" width={24} height={24} className="h-6 w-6 object-cover" />
+                          <Image src="/media/images/wechat.webp" alt="WeChat" width={24} height={24} className="h-6 w-6 object-cover" />
                         </div>
                         <span className="font-medium text-foreground">WeChat Post</span>
                       </div>

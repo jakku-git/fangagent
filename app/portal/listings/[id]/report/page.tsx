@@ -198,7 +198,7 @@ export default function PerformanceReportPage({ params }: { params: Promise<{ id
           <div className="bg-foreground px-10 py-10">
             <div className="flex items-start justify-between">
               <div>
-                <Image src="/navbarlogo.png" alt="FANG.COM.AU" width={5357} height={1721} className="h-7 w-auto brightness-0 invert mb-8" />
+                <Image src="/media/images/navbarlogo.webp" alt="FANG.COM.AU" width={5357} height={1721} className="h-7 w-auto brightness-0 invert mb-8" />
                 <p className="text-xs uppercase tracking-widest text-background/50 mb-2">Performance Report</p>
                 <h1 className="text-2xl font-medium text-background leading-snug">
                   {listing.address}<br />
@@ -285,28 +285,28 @@ export default function PerformanceReportPage({ params }: { params: Promise<{ id
             <div className="space-y-3">
               {[
                 {
-                  logo: <div className="h-8 w-8 rounded-xl overflow-hidden flex-shrink-0"><Image src="/fangapplogo.png" alt="Fang" width={32} height={32} className="h-8 w-8 object-cover" /></div>,
+                  logo: <div className="h-8 w-8 rounded-xl overflow-hidden flex-shrink-0"><Image src="/media/images/fangapplogo.webp" alt="Fang" width={32} height={32} className="h-8 w-8 object-cover" /></div>,
                   channel: "Fang Property Portal",
                   desc: "fang.com.au web & app listing with full Chinese translation",
                   reach: "1.4M registered members",
                   active: true,
                 },
                 {
-                  logo: <div className="h-8 w-8 rounded-xl overflow-hidden flex-shrink-0"><Image src="/images/redbook.png" alt="REDNote" width={32} height={32} className="h-8 w-8 object-cover" /></div>,
+                  logo: <div className="h-8 w-8 rounded-xl overflow-hidden flex-shrink-0"><Image src="/media/images/redbook.webp" alt="REDNote" width={32} height={32} className="h-8 w-8 object-cover" /></div>,
                   channel: "REDNote (小红书)",
                   desc: "Image posts published across 10–12 verified accounts",
                   reach: "50K+ avg. post reach",
                   active: listing.package === "Premium" || listing.package === "Premium+",
                 },
                 {
-                  logo: <div className="h-8 w-8 rounded-xl overflow-hidden flex-shrink-0"><Image src="/images/wechat.png" alt="WeChat" width={32} height={32} className="h-8 w-8 object-cover" /></div>,
+                  logo: <div className="h-8 w-8 rounded-xl overflow-hidden flex-shrink-0"><Image src="/media/images/wechat.webp" alt="WeChat" width={32} height={32} className="h-8 w-8 object-cover" /></div>,
                   channel: "WeChat Official Account",
                   desc: "Editorial post delivered directly to follower inboxes",
                   reach: "1.2M followers",
                   active: listing.package === "Premium" || listing.package === "Premium+",
                 },
                 {
-                  logo: <div className="h-8 w-8 rounded-xl overflow-hidden flex-shrink-0"><Image src="/images/wechat.png" alt="WeChat" width={32} height={32} className="h-8 w-8 object-cover" /></div>,
+                  logo: <div className="h-8 w-8 rounded-xl overflow-hidden flex-shrink-0"><Image src="/media/images/wechat.webp" alt="WeChat" width={32} height={32} className="h-8 w-8 object-cover" /></div>,
                   channel: "WeChat Video Channel",
                   desc: "Chinese-language property video with voiceover",
                   reach: "Video distribution network",
@@ -338,7 +338,7 @@ export default function PerformanceReportPage({ params }: { params: Promise<{ id
                 {listing.fang_url && (
                   <div className="flex items-center gap-3 rounded-xl border border-border bg-background px-5 py-4">
                     <div className="h-7 w-7 rounded-lg overflow-hidden flex-shrink-0">
-                      <Image src="/fangapplogo.png" alt="Fang" width={28} height={28} className="h-7 w-7 object-cover" />
+                      <Image src="/media/images/fangapplogo.webp" alt="Fang" width={28} height={28} className="h-7 w-7 object-cover" />
                     </div>
                     <div className="min-w-0">
                       <p className="text-xs text-muted-foreground mb-0.5">Fang Portal</p>
@@ -349,7 +349,7 @@ export default function PerformanceReportPage({ params }: { params: Promise<{ id
                 {listing.red_note_url && (
                   <div className="flex items-center gap-3 rounded-xl border border-border bg-background px-5 py-4">
                     <div className="h-7 w-7 rounded-lg overflow-hidden flex-shrink-0">
-                      <Image src="/images/redbook.png" alt="REDNote" width={28} height={28} className="h-7 w-7 object-cover" />
+                      <Image src="/media/images/redbook.webp" alt="REDNote" width={28} height={28} className="h-7 w-7 object-cover" />
                     </div>
                     <div className="min-w-0">
                       <p className="text-xs text-muted-foreground mb-0.5">REDNote Post</p>
@@ -360,7 +360,7 @@ export default function PerformanceReportPage({ params }: { params: Promise<{ id
                 {listing.wechat_url && (
                   <div className="flex items-center gap-3 rounded-xl border border-border bg-background px-5 py-4">
                     <div className="h-7 w-7 rounded-lg overflow-hidden flex-shrink-0">
-                      <Image src="/images/wechat.png" alt="WeChat" width={28} height={28} className="h-7 w-7 object-cover" />
+                      <Image src="/media/images/wechat.webp" alt="WeChat" width={28} height={28} className="h-7 w-7 object-cover" />
                     </div>
                     <div className="min-w-0">
                       <p className="text-xs text-muted-foreground mb-0.5">WeChat Post</p>

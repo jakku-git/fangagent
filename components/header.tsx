@@ -34,7 +34,7 @@ export function Header() {
           {/* Logo */}
           <Link href="#" className="flex-shrink-0">
             <Image
-              src="/navbarlogo.png"
+              src="/media/images/navbarlogo.webp"
               alt="FANG.COM.AU"
               width={5357}
               height={1721}

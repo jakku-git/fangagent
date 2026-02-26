@@ -83,7 +83,7 @@ export function PhilosophySection() {
                 }}
               >
                 <Image
-                  src="/images/redbook.png"
+                  src="/media/images/redbook.webp"
                   alt="V1 Expedition Backpack in alpine setting"
                   fill
                   className="object-cover"
@@ -106,7 +106,7 @@ export function PhilosophySection() {
                 }}
               >
                 <Image
-                  src="/images/wechat.png"
+                  src="/media/images/wechat.webp"
                   alt="V1 Thermal mug in forest setting"
                   fill
                   className="object-cover"
@@ -131,7 +131,7 @@ export function PhilosophySection() {
           </h2>
           <div className="grid grid-cols-2 gap-3">
             <div className="relative aspect-[4/3] overflow-hidden rounded-2xl">
-              <Image src="/images/redbook.png" alt="REDNote" fill className="object-cover" />
+              <Image src="/media/images/redbook.webp" alt="REDNote" fill className="object-cover" />
               <div className="absolute bottom-3 left-3 right-3">
                 <span className="backdrop-blur-md px-3 py-1.5 text-xs font-medium rounded-full bg-[rgba(255,255,255,0.2)] text-white">
                   REDNote (小红书)
@@ -139,7 +139,7 @@ export function PhilosophySection() {
               </div>
             </div>
             <div className="relative aspect-[4/3] overflow-hidden rounded-2xl">
-              <Image src="/images/wechat.png" alt="WeChat" fill className="object-cover" />
+              <Image src="/media/images/wechat.webp" alt="WeChat" fill className="object-cover" />
               <div className="absolute bottom-3 left-3 right-3">
                 <span className="backdrop-blur-md px-3 py-1.5 text-xs font-medium rounded-full bg-[rgba(255,255,255,0.2)] text-white">
                   WeChat
@@ -151,7 +151,7 @@ export function PhilosophySection() {
 
         {/* Video */}
         <div className="relative aspect-video w-full">
-          <video autoPlay loop muted playsInline className="absolute inset-0 h-full w-full object-cover" src="https://ljbajzpevhwgtkpdcllf.supabase.co/storage/v1/object/public/videos/fangvid.mp4" />
+          <video autoPlay loop muted playsInline className="absolute inset-0 h-full w-full object-cover" src="/media/videos/fangvid.webm" />
         </div>
 
         {/* Description */}
@@ -184,7 +184,7 @@ export function PhilosophySection() {
       {/* ── DESKTOP: video + description + stats ── */}
       {/* Video */}
       <div className="relative hidden md:block aspect-[21/9] w-full">
-        <video autoPlay loop muted playsInline className="absolute inset-0 h-full w-full object-cover" src="https://ljbajzpevhwgtkpdcllf.supabase.co/storage/v1/object/public/videos/fangvid.mp4" />
+        <video autoPlay loop muted playsInline className="absolute inset-0 h-full w-full object-cover" src="/media/videos/fangvid.webm" />
       </div>
 
       {/* Description */}

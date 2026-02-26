@@ -6,12 +6,12 @@ import { useEffect, useRef, useState } from "react";
 
 const sideImages = [
   {
-    src: "/images/fangmobile.jpg",
+    src: "/media/images/fangmobile.webp",
     alt: "Fang Mobile",
     position: "left",
   },
   {
-    src: "/images/wechat_officialaccount.jpg",
+    src: "/media/images/wechat_officialaccount.webp",
     alt: "WeChat Official Account",
     position: "right",
   },
@@ -62,21 +62,22 @@ export function HeroSection() {
       {/* ── MOBILE: simple full-screen hero, no animation ── */}
       <div className="md:hidden relative h-screen w-full overflow-hidden">
         <Image
-          src="/images/hero-main.png"
-          alt="Sydney Harbour aerial view"
+          src="/media/images/hero-main.webp"
+                alt="Sydney Harbour aerial view"
           fill
           className="object-cover"
           priority
         />
         <div className="absolute inset-0 flex items-center justify-center px-8">
           <Image
-            src="/logo.webp"
+            src="/media/images/logo.webp"
             alt="FANG.COM.AU"
             width={800}
             height={200}
             className="w-full max-w-[280px]"
             priority
           />
+
         </div>
       </div>
 
@@ -115,9 +116,9 @@ export function HeroSection() {
                   borderRadius: `${borderRadius}px`,
                 }}
               >
-                <Image src="/images/hero-main.png" alt="Sydney Harbour aerial view" fill className="object-cover" priority />
+                <Image src="/media/images/hero-main.webp" alt="Sydney Harbour aerial view" fill className="object-cover" priority />
                 <div className="absolute inset-0 flex items-center justify-center overflow-hidden px-12">
-                  <Image src="/logo.webp" alt="FANG.COM.AU" width={800} height={200} className="w-full max-w-xl" priority />
+                  <Image src="/media/images/logo.webp" alt="FANG.COM.AU" width={800} height={200} className="w-full max-w-xl" priority />
                 </div>
               </div>
 

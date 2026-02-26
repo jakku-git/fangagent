@@ -54,8 +54,8 @@ function ScrollRevealText({ text, className, progressOffset = 0, progressScale =
 }
 
 const sideVideos = [
-  { src: "https://ljbajzpevhwgtkpdcllf.supabase.co/storage/v1/object/public/videos/left.mp4", position: "left" },
-  { src: "https://ljbajzpevhwgtkpdcllf.supabase.co/storage/v1/object/public/videos/right.mp4", position: "right" },
+  { src: "/media/videos/left.webm", position: "left" },
+  { src: "/media/videos/right.webm", position: "right" },
 ];
 
 export function TechnologySection() {
@@ -165,7 +165,7 @@ export function TechnologySection() {
               }}
             >
               <Image
-                src="/midsection.jpg"
+                src="/media/images/midsection.webp"
                 alt="Fang mid section"
                 fill
                 className="object-cover"
@@ -253,7 +253,7 @@ export function TechnologySection() {
 
       {/* Mobile static image — hidden on desktop */}
       <div className="md:hidden relative h-[50vh] w-full overflow-hidden">
-        <Image src="/midsection.jpg" alt="Fang" fill className="object-cover" />
+        <Image src="/media/images/midsection.webp" alt="Fang" fill className="object-cover" />
         <div className="absolute inset-0 bg-foreground/40 flex items-center justify-center px-6">
           <h2 className="text-3xl font-medium text-white text-center leading-tight">
             Your Listing.<br />Our Audience.

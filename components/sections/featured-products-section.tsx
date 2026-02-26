@@ -11,7 +11,7 @@ const features: (Omit<ChannelDetail, "color"> & { description: string; detail: s
     subtitle: "300M+ users globally",
     description: "300M+ users globally",
     detail: "Think of REDNote (小红书) as a mix between Instagram and Pinterest — but used exclusively by Chinese speakers. We are one of the only official marketing partners for real estate in Australia.",
-    image: "/rednote1.jpg",
+    image: "/media/images/rednote1.webp",
     portrait: true,
     hook: "REDNote is not just a social media app. It is the single most influential platform for shaping purchase decisions among Chinese millennials and Gen Z — including property.",
     body: [],
@@ -22,7 +22,7 @@ const features: (Omit<ChannelDetail, "color"> & { description: string; detail: s
     modal: {
       title: "REDNote — China's Instagram",
       subtitle: "300M+ users globally",
-      image: "/rednote1.jpg",
+      image: "/media/images/rednote1.webp",
       color: "#FF2442",
       hook: "REDNote is not just a social media app. It is the single most influential platform shaping purchase decisions among Chinese millennials and Gen Z — including property.",
       body: [
@@ -62,7 +62,7 @@ const features: (Omit<ChannelDetail, "color"> & { description: string; detail: s
     subtitle: "1.3B active users worldwide",
     description: "1.3B active users worldwide",
     detail: "WeChat is how Chinese communities message, pay, read news, and discover businesses — all in one app. We hold one of the only officially verified real estate accounts in all of Australia.",
-    image: "/images/wechat_officialaccount.jpg",
+    image: "/media/images/wechat_officialaccount.webp",
     portrait: true,
     hook: "",
     body: [],
@@ -73,7 +73,7 @@ const features: (Omit<ChannelDetail, "color"> & { description: string; detail: s
     modal: {
       title: "WeChat — China's Everything App",
       subtitle: "1.3B active users worldwide",
-      image: "/images/wechat_officialaccount.jpg",
+      image: "/media/images/wechat_officialaccount.webp",
       color: "#07C160",
       hook: "WeChat is not a messaging app. It is the operating system of Chinese daily life — and it is where every Chinese buyer in Australia spends hours every single day.",
       body: [
@@ -113,7 +113,7 @@ const features: (Omit<ChannelDetail, "color"> & { description: string; detail: s
     subtitle: "Australia's #1 Chinese property app",
     description: "Australia's #1 Chinese property app",
     detail: "Our dedicated property platform is built entirely in Chinese, with 1.4 million registered members and 320,000 daily active users.",
-    image: "/images/fangmobile.jpg",
+    image: "/media/images/fangmobile.webp",
     portrait: true,
     hook: "",
     body: [],
@@ -124,7 +124,7 @@ const features: (Omit<ChannelDetail, "color"> & { description: string; detail: s
     modal: {
       title: "Fang Property Portal",
       subtitle: "Australia's #1 Chinese property app",
-      image: "/images/fangmobile.jpg",
+      image: "/media/images/fangmobile.webp",
       color: "#1890FF",
       hook: "Chinese buyers don't use realestate.com.au. They use Fang — because it was built entirely for them, in their language, with the data they actually care about.",
       body: [
@@ -164,7 +164,7 @@ const features: (Omit<ChannelDetail, "color"> & { description: string; detail: s
     subtitle: "870,000+ daily readers",
     description: "870,000+ daily readers",
     detail: "Sydney Today is the most-read Chinese news publication in Australia — the Chinese-language equivalent of the Sydney Morning Herald for this community.",
-    image: "/images/sydneytoday.jpg",
+    image: "/media/images/sydneytoday.webp",
     portrait: true,
     hook: "",
     body: [],
@@ -175,7 +175,7 @@ const features: (Omit<ChannelDetail, "color"> & { description: string; detail: s
     modal: {
       title: "Sydney Today — The Chinese Daily",
       subtitle: "870,000+ daily readers",
-      image: "/images/sydneytoday.jpg",
+      image: "/media/images/sydneytoday.webp",
       color: "#E63946",
       hook: "Think of Sydney Today as the Chinese-language Sydney Morning Herald. It's the first thing hundreds of thousands of Chinese Australians read every morning — and it's where your listing becomes news.",
       body: [
@@ -215,7 +215,7 @@ const features: (Omit<ChannelDetail, "color"> & { description: string; detail: s
     subtitle: "Direct to 1.2M+ inboxes",
     description: "Direct to 1.2M+ inboxes",
     detail: "Our WeChat newsletter is sent directly to over 1.2 million followers. Unlike email, WeChat messages are read almost immediately.",
-    image: "/images/wechat_newsletter.jpg",
+    image: "/media/images/wechat_newsletter.webp",
     portrait: true,
     hook: "",
     body: [],
@@ -226,7 +226,7 @@ const features: (Omit<ChannelDetail, "color"> & { description: string; detail: s
     modal: {
       title: "WeChat Newsletter",
       subtitle: "Direct to 1.2M+ inboxes",
-      image: "/images/wechat_newsletter.jpg",
+      image: "/media/images/wechat_newsletter.webp",
       color: "#07C160",
       hook: "Email marketing has a 20% open rate on a good day. WeChat newsletter messages are read by almost everyone who receives them — because they land in the same place as messages from family.",
       body: [
@@ -266,7 +266,7 @@ const features: (Omit<ChannelDetail, "color"> & { description: string; detail: s
     subtitle: "Australia's largest Chinese media group",
     description: "Australia's largest Chinese media group",
     detail: "Fang is backed by MediaToday Group — Australia's largest Chinese media company — which also operates SydneyToday, QLDToday, WAToday, Melbourne Today, uMall, and more.",
-    image: "/mediatoday.jpg",
+    image: "/media/images/mediatoday.webp",
     portrait: true,
     hook: "",
     body: [],
@@ -277,7 +277,7 @@ const features: (Omit<ChannelDetail, "color"> & { description: string; detail: s
     modal: {
       title: "The MediaToday Network",
       subtitle: "Australia's largest Chinese media group",
-      image: "/mediatoday.jpg",
+      image: "/media/images/mediatoday.webp",
       color: "#1A1A2E",
       hook: "Fang doesn't operate as a standalone portal. It is part of Australia's largest Chinese media empire — giving your listing access to an ecosystem that reaches 3.5 million people.",
       body: [

@@ -16,7 +16,7 @@ export function PageLayout({ children }: PageLayoutProps) {
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
           <Link href="/">
             <Image
-              src="/navbarlogo.png"
+              src="/media/images/navbarlogo.webp"
               alt="FANG.COM.AU"
               width={5357}
               height={1721}

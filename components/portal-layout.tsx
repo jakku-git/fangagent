@@ -50,7 +50,7 @@ export function PortalLayout({ children }: { children: React.ReactNode }) {
     <aside className="flex h-full flex-col border-r border-border bg-background">
       <div className="flex items-center justify-between border-b border-border px-5 py-4">
         <Link href="/">
-          <Image src="/navbarlogo.png" alt="FANG.COM.AU" width={5357} height={1721} className="h-6 w-auto" />
+          <Image src="/media/images/navbarlogo.webp" alt="FANG.COM.AU" width={5357} height={1721} className="h-6 w-auto" />
         </Link>
         <button onClick={() => setSidebarOpen(false)} className="text-muted-foreground lg:hidden">
           <X size={18} />
@@ -123,7 +123,7 @@ export function PortalLayout({ children }: { children: React.ReactNode }) {
           <button onClick={() => setSidebarOpen(true)} className="text-foreground">
             <Menu size={20} />
           </button>
-          <Image src="/navbarlogo.png" alt="FANG.COM.AU" width={5357} height={1721} className="h-6 w-auto" />
+          <Image src="/media/images/navbarlogo.webp" alt="FANG.COM.AU" width={5357} height={1721} className="h-6 w-auto" />
           <div className="h-6 w-6 rounded-full bg-foreground text-background text-xs font-medium flex items-center justify-center">
             {(profile?.full_name ?? user.email ?? "?").charAt(0).toUpperCase()}
           </div>

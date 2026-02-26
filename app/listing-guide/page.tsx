@@ -5,7 +5,7 @@ const steps = [
     number: "01",
     title: "Choose your package",
     duration: "2 minutes",
-    desc: "Select the package that suits your campaign. Essential ($425) gets you on fang.com.au. Premium ($750) adds REDNote and WeChat posts. Premium+ ($1,250) adds a professionally produced Chinese-language video.",
+    desc: "Select the package that suits your campaign. Essential ($475) gets you on fang.com.au. Premium ($880) adds REDNote and WeChat posts. Premium+ ($1,650) adds a professionally produced Chinese-language video.",
     tip: "Not sure which package? Most agents start with Premium — it gives you the portal listing plus the social reach that drives the most enquiries.",
   },
   {
@@ -181,7 +181,7 @@ export default function ListingGuidePage() {
             </div>
             <div>
               <p className="text-xs uppercase tracking-widest text-muted-foreground mb-1">Starting from</p>
-              <p className="text-2xl font-medium text-foreground">$425 incl. GST</p>
+              <p className="text-2xl font-medium text-foreground">$475 incl. GST</p>
             </div>
             <div>
               <p className="text-xs uppercase tracking-widest text-muted-foreground mb-1">Audience</p>

@@ -12,14 +12,14 @@ export function GallerySection() {
   const lastScrollRef = useRef(0);
 
   const images = [
-    { src: "/casestudy1.jpg", alt: "Case study 1" },
-    { src: "/casestudy2.jpg", alt: "Case study 2" },
-    { src: "/casestudy3.jpg", alt: "Case study 3" },
-    { src: "/casestudy4.jpg", alt: "Case study 4" },
-    { src: "/casestudy5.jpg", alt: "Case study 5" },
-    { src: "/casestudy6.jpg", alt: "Case study 6" },
-    { src: "/casestudy7.jpg", alt: "Case study 7" },
-    { src: "/casestudy8.jpg", alt: "Case study 8" },
+    { src: "/media/images/casestudy1.webp", alt: "Case study 1" },
+    { src: "/media/images/casestudy2.webp", alt: "Case study 2" },
+    { src: "/media/images/casestudy3.webp", alt: "Case study 3" },
+    { src: "/media/images/casestudy4.webp", alt: "Case study 4" },
+    { src: "/media/images/casestudy5.webp", alt: "Case study 5" },
+    { src: "/media/images/casestudy6.webp", alt: "Case study 6" },
+    { src: "/media/images/casestudy7.webp", alt: "Case study 7" },
+    { src: "/media/images/casestudy8.webp", alt: "Case study 8" },
   ];
 
   // Calculate section height based on content width

@@ -118,7 +118,7 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
         {/* Header */}
         <div className="flex items-center justify-between px-6 pt-5 pb-4 border-b border-border flex-shrink-0">
           <div className="flex items-center gap-3">
-            <Image src="/navbarlogo.png" alt="FANG.COM.AU" width={5357} height={1721} className="h-6 w-auto" />
+            <Image src="/media/images/navbarlogo.webp" alt="FANG.COM.AU" width={5357} height={1721} className="h-6 w-auto" />
             {!done && (
               <span className="text-xs text-muted-foreground">
                 Step {step + 1} of {steps.length}

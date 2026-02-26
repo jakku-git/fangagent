@@ -134,7 +134,7 @@ export default function UpdatePasswordPage() {
     <div className="min-h-screen bg-background flex">
       <div className="hidden lg:flex lg:w-1/2 bg-foreground flex-col justify-between p-16">
         <Link href="/">
-          <Image src="/navbarlogo.png" alt="FANG.COM.AU" width={5357} height={1721} className="h-24 w-auto brightness-0 invert" />
+          <Image src="/media/images/navbarlogo.webp" alt="FANG.COM.AU" width={5357} height={1721} className="h-24 w-auto brightness-0 invert" />
         </Link>
         <div>
           <p className="text-5xl font-medium leading-tight text-background">Set a new password.</p>
@@ -148,7 +148,7 @@ export default function UpdatePasswordPage() {
       <div className="flex flex-1 flex-col items-center justify-center px-6 py-12">
         <div className="w-full max-w-sm">
           <Link href="/" className="mb-10 block lg:hidden">
-            <Image src="/navbarlogo.png" alt="FANG.COM.AU" width={5357} height={1721} className="h-7 w-auto" />
+            <Image src="/media/images/navbarlogo.webp" alt="FANG.COM.AU" width={5357} height={1721} className="h-7 w-auto" />
           </Link>
           <Suspense fallback={
             <div className="flex flex-col items-center gap-4">

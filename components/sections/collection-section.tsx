@@ -7,7 +7,7 @@ import { PackageDemoModal, type PackageDemo } from "@/components/package-demo-mo
 const packages = [
   {
     id: 1,
-    price: "$425",
+    price: "$475",
     name: "Essential",
     tagline: "Get found where Chinese buyers search.",
     description:
@@ -20,13 +20,13 @@ const packages = [
       "Weekly listing performance report via email",
       "CRM integration available",
     ],
-    images: ["/e1.jpg", "/e2.jpg", "/e3.jpg", "/e4.jpg", "/e5.jpg"],
-    video: "https://ljbajzpevhwgtkpdcllf.supabase.co/storage/v1/object/public/videos/essential.mp4",
+    images: ["/media/images/e1.webp", "/media/images/e2.webp", "/media/images/e3.webp", "/media/images/e4.webp", "/media/images/e5.webp"],
+    video: "/media/videos/essential.webm",
     highlight: false,
   },
   {
     id: 2,
-    price: "$750",
+    price: "$880",
     name: "Premium",
     tagline: "Put your listing in front of millions.",
     description:
@@ -39,13 +39,13 @@ const packages = [
       "Chinese-localised captions and content",
       "Covers all NSW metropolitan areas",
     ],
-    images: ["/p1.jpg", "/p2.jpg", "/p3.jpg", "/p4.jpg", "/p5.jpg"],
-    video: "https://ljbajzpevhwgtkpdcllf.supabase.co/storage/v1/object/public/videos/premium.mp4",
+    images: ["/media/images/p1.webp", "/media/images/p2.webp", "/media/images/p3.webp", "/media/images/p4.webp", "/media/images/p5.webp"],
+    video: "/media/videos/premium.webm",
     highlight: true,
   },
   {
     id: 3,
-    price: "$1,250",
+    price: "$1,650",
     name: "Premium+",
     tagline: "The most powerful way to reach Chinese buyers.",
     description:
@@ -58,8 +58,8 @@ const packages = [
       "WeChat Video Channel distribution",
       "Maximum engagement format for Chinese platforms",
     ],
-    images: ["/t1.jpg", "/t2.jpg", "/t3.jpg", "/t4.jpg", "/t5.jpg"],
-    video: "https://ljbajzpevhwgtkpdcllf.supabase.co/storage/v1/object/public/videos/premiumplus.mp4",
+    images: ["/media/images/t1.webp", "/media/images/t2.webp", "/media/images/t3.webp", "/media/images/t4.webp", "/media/images/t5.webp"],
+    video: "/media/videos/premiumplus.webm",
     highlight: false,
   },
 ];

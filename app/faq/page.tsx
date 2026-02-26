@@ -73,7 +73,7 @@ const faqs = [
     questions: [
       {
         q: "What are the three packages?",
-        a: "Essential ($425): Your property on fang.com.au with full Chinese translation. Premium ($750): Everything in Essential, plus professionally produced image posts on REDNote and WeChat. Premium+ ($1,250): Everything in Premium, plus a professionally produced Chinese-language video distributed across our full network.",
+        a: "Essential ($475): Your property on fang.com.au with full Chinese translation. Premium ($880): Everything in Essential, plus professionally produced image posts on REDNote and WeChat. Premium+ ($1,650): Everything in Premium, plus a professionally produced Chinese-language video distributed across our full network.",
       },
       {
         q: "Do prices include GST?",
