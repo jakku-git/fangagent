@@ -12,7 +12,7 @@ export async function POST(req: NextRequest) {
     }
 
     await resend.emails.send({
-      from: "Fang Agent Portal <portal@agents.fang.com.au>",
+      from: "Fang Agent Portal <noreply@agents.fang.com.au>",
       to: "marketing@fang.com.au",
       subject: "Media Kit Request",
       html: `
