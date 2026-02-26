@@ -11,8 +11,8 @@ import {
 
 const navItems = [
   { href: "/portal", label: "Dashboard", icon: LayoutDashboard, exact: true },
-  { href: "/portal/listings", label: "My Listings", icon: FileText },
   { href: "/portal/listings/new", label: "New Listing", icon: PlusCircle },
+  { href: "/portal/listings", label: "My Listings", icon: FileText },
   { href: "/portal/billing", label: "Billing", icon: CreditCard },
   { href: "/portal/integrations", label: "Integrations", icon: Plug },
   { href: "/portal/profile", label: "Profile", icon: User },

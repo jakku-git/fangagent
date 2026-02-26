@@ -38,8 +38,8 @@ function InvoiceRow({
           <div className="flex flex-wrap gap-3 text-xs text-muted-foreground">
             <span className="font-mono">{invoice.invoice_ref ?? invoice.id.slice(0, 8)}</span>
             <span>{invoice.package}</span>
-            <span>Due {invoice.due_date}</span>
-            {invoice.paid_at && <span>Paid {invoice.paid_at}</span>}
+            <span>Due {invoice.due_date?.slice(0, 10)}</span>
+            {invoice.paid_at && <span>Paid {invoice.paid_at.slice(0, 10)}</span>}
           </div>
         </div>
         <div className="ml-4 flex items-center gap-3 flex-shrink-0">

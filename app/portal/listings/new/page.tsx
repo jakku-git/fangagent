@@ -486,8 +486,22 @@ export default function NewListingPage() {
                 <div className="px-5 py-4">
                   <p className="text-xs uppercase tracking-widest text-muted-foreground mb-3">Package</p>
                   <div className="flex items-center justify-between">
-                    <p className="font-medium text-foreground">{selectedPackage}</p>
-                    <p className="font-medium text-foreground">${PACKAGE_PRICES[selectedPackage!]} <span className="text-xs text-muted-foreground font-normal">inc. GST</span></p>
+                    <div>
+                      <p className="font-medium text-foreground">{selectedPackage}</p>
+                      {promoResult && (
+                        <p className="text-xs text-green-600 mt-0.5">Promo applied: {promoResult.code} ({promoResult.discount_percent}% off)</p>
+                      )}
+                    </div>
+                    <div className="text-right">
+                      {promoResult ? (
+                        <>
+                          <p className="text-xs text-muted-foreground line-through">${PACKAGE_PRICES[selectedPackage!]}</p>
+                          <p className="font-medium text-green-600">${Math.round(PACKAGE_PRICES[selectedPackage!] * (1 - promoResult.discount_percent / 100))} <span className="text-xs text-muted-foreground font-normal">inc. GST</span></p>
+                        </>
+                      ) : (
+                        <p className="font-medium text-foreground">${PACKAGE_PRICES[selectedPackage!]} <span className="text-xs text-muted-foreground font-normal">inc. GST</span></p>
+                      )}
+                    </div>
                   </div>
                 </div>
                 <div className="px-5 py-4">
@@ -514,7 +528,7 @@ export default function NewListingPage() {
                 <div className="px-5 py-4">
                   <p className="text-xs uppercase tracking-widest text-muted-foreground mb-2">What happens next</p>
                   <ol className="space-y-2 text-xs text-muted-foreground">
-                    <li className="flex gap-2"><span className="text-foreground font-medium">1.</span> An invoice for <span className="text-foreground font-medium">${PACKAGE_PRICES[selectedPackage!]}</span> will be generated.</li>
+                    <li className="flex gap-2"><span className="text-foreground font-medium">1.</span> An invoice for <span className="text-foreground font-medium">${promoResult ? Math.round(PACKAGE_PRICES[selectedPackage!] * (1 - promoResult.discount_percent / 100)) : PACKAGE_PRICES[selectedPackage!]}</span> will be generated{promoResult ? ` (${promoResult.discount_percent}% promo discount applied)` : ""}.</li>
                     <li className="flex gap-2"><span className="text-foreground font-medium">2.</span> Pay via bank transfer and upload your remittance advice in the Billing section.</li>
                     <li className="flex gap-2"><span className="text-foreground font-medium">3.</span> Your listing goes into review once payment is confirmed.</li>
                     <li className="flex gap-2"><span className="text-foreground font-medium">4.</span> Our team translates and localises your content within 24 hours{selectedPackage === "Premium+" ? " (video production takes longer)" : ""}.</li>
