@@ -50,7 +50,7 @@ export function PortalLayout({ children }: { children: React.ReactNode }) {
     <aside className="flex h-full flex-col border-r border-border bg-background">
       <div className="flex items-center justify-between border-b border-border px-5 py-4">
         <Link href="/">
-          <Image src="/media/images/navbarlogo.webp" alt="FANG.COM.AU" width={5357} height={1721} className="h-6 w-auto" />
+          <Image src="/media/images/navbarlogo.webp" alt="FANG.COM.AU" width={5357} height={1721} className="h-12 w-auto" />
         </Link>
         <button onClick={() => setSidebarOpen(false)} className="text-muted-foreground lg:hidden">
           <X size={18} />
