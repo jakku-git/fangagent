@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createServiceClient } from "@/lib/supabase/server";
+import { nowSydneyISO } from "@/lib/time";
 
 export async function POST(req: NextRequest) {
   try {
@@ -7,7 +8,7 @@ export async function POST(req: NextRequest) {
     if (!code) return NextResponse.json({ error: "No code provided." }, { status: 400 });
 
     const supabase = createServiceClient();
-    const now = new Date().toISOString();
+    const now = nowSydneyISO();
 
     const { data, error } = await supabase
       .from("promo_codes")

@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { createServiceClient } from "@/lib/supabase/server";
 import { sendNewListingEmail, sendInvoiceEmail } from "@/lib/email";
 import { PACKAGE_PRICES } from "@/lib/supabase/types";
+import { addDaysSydney, nowSydneyISO } from "@/lib/time";
 
 export async function POST(req: NextRequest) {
   try {
@@ -61,7 +62,7 @@ export async function POST(req: NextRequest) {
     let discountPercent = 0;
     let validatedPromoCode: string | null = null;
     if (promoCode) {
-      const now = new Date().toISOString();
+      const now = nowSydneyISO();
       const { data: promo } = await supabase
         .from("promo_codes")
         .select("code, discount_percent")
@@ -79,8 +80,7 @@ export async function POST(req: NextRequest) {
     const baseAmount = PACKAGE_PRICES[pkg] ?? 0;
     const discountAmount = Math.round(baseAmount * discountPercent / 100);
     const amount = baseAmount - discountAmount;
-    const dueDate = new Date();
-    dueDate.setDate(dueDate.getDate() + 7);
+    const dueDate = addDaysSydney(7);
 
     const { data: invoice, error: invoiceError } = await supabase
       .from("invoices")
@@ -94,7 +94,7 @@ export async function POST(req: NextRequest) {
         discount_percent: discountPercent > 0 ? discountPercent : null,
         promo_code: validatedPromoCode,
         status: "unpaid",
-        due_date: dueDate.toISOString().slice(0, 10),
+        due_date: dueDate,
       })
       .select()
       .single();
@@ -120,7 +120,7 @@ export async function POST(req: NextRequest) {
         originalAmount: discountPercent > 0 ? baseAmount : undefined,
         discountPercent: discountPercent > 0 ? discountPercent : undefined,
         promoCode: validatedPromoCode ?? undefined,
-        dueDate: dueDate.toISOString().slice(0, 10),
+        dueDate: dueDate,
       }).catch(console.error);
     }
 

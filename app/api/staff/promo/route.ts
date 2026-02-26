@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createServiceClient } from "@/lib/supabase/server";
+import { nowSydneyISO } from "@/lib/time";
 
 // GET — list all promo codes
 export async function GET() {
@@ -28,7 +29,7 @@ export async function POST(req: NextRequest) {
       .insert({
         code: code.toUpperCase().trim(),
         discount_percent,
-        active_from: active_from || new Date().toISOString(),
+        active_from: active_from || nowSydneyISO(),
         active_until,
         created_by: created_by || null,
       })

@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createServiceClient } from "@/lib/supabase/server";
+import { nowSydneyISO } from "@/lib/time";
 
 // Staff confirms payment and marks invoice paid
 export async function PATCH(req: NextRequest) {
@@ -10,7 +11,7 @@ export async function PATCH(req: NextRequest) {
     const supabase = createServiceClient();
 
     const updates: Record<string, unknown> = { status };
-    if (status === "paid") updates.paid_at = new Date().toISOString();
+    if (status === "paid") updates.paid_at = nowSydneyISO();
 
     const { error: invoiceError } = await supabase
       .from("invoices")

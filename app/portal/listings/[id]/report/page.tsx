@@ -56,7 +56,7 @@ export default function PerformanceReportPage({ params }: { params: Promise<{ id
 
   const enquiryRate = ((listing.enquiries / listing.views) * 100).toFixed(2);
   const saveRate = ((listing.saves / listing.views) * 100).toFixed(1);
-  const reportDate = new Date().toLocaleDateString("en-AU", { day: "numeric", month: "long", year: "numeric" });
+  const reportDate = new Date().toLocaleDateString("en-AU", { timeZone: "Australia/Sydney", day: "numeric", month: "long", year: "numeric" });
 
   const weeklyData = [
     { week: "Week 1", views: Math.round(listing.views * 0.38), enquiries: Math.round(listing.enquiries * 0.35) },
