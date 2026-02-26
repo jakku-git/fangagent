@@ -54,8 +54,8 @@ function ScrollRevealText({ text, className, progressOffset = 0, progressScale =
 }
 
 const sideVideos = [
-  { src: "/left.mp4", position: "left" },
-  { src: "/right.mp4", position: "right" },
+  { src: "https://ljbajzpevhwgtkpdcllf.supabase.co/storage/v1/object/public/videos/left.mp4", position: "left" },
+  { src: "https://ljbajzpevhwgtkpdcllf.supabase.co/storage/v1/object/public/videos/right.mp4", position: "right" },
 ];
 
 export function TechnologySection() {

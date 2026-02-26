@@ -21,7 +21,7 @@ const packages = [
       "CRM integration available",
     ],
     images: ["/e1.jpg", "/e2.jpg", "/e3.jpg", "/e4.jpg", "/e5.jpg"],
-    video: "/essential.mp4",
+    video: "https://ljbajzpevhwgtkpdcllf.supabase.co/storage/v1/object/public/videos/essential.mp4",
     highlight: false,
   },
   {
@@ -40,7 +40,7 @@ const packages = [
       "Covers all NSW metropolitan areas",
     ],
     images: ["/p1.jpg", "/p2.jpg", "/p3.jpg", "/p4.jpg", "/p5.jpg"],
-    video: "/premium.mp4",
+    video: "https://ljbajzpevhwgtkpdcllf.supabase.co/storage/v1/object/public/videos/premium.mp4",
     highlight: true,
   },
   {
@@ -59,7 +59,7 @@ const packages = [
       "Maximum engagement format for Chinese platforms",
     ],
     images: ["/t1.jpg", "/t2.jpg", "/t3.jpg", "/t4.jpg", "/t5.jpg"],
-    video: "/premiumplus.mp4",
+    video: "https://ljbajzpevhwgtkpdcllf.supabase.co/storage/v1/object/public/videos/premiumplus.mp4",
     highlight: false,
   },
 ];
