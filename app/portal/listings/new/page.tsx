@@ -19,13 +19,13 @@ const packages: { name: PackageName; price: number; tagline: string; includes: s
     name: "Premium",
     price: 880,
     tagline: "Put your listing in front of millions.",
-    includes: ["Everything in Essential", "Image posts on REDNote (小红书)", "Published across 10–12 verified REDNote accounts", "WeChat Official Account post — 1.2M reach", "Chinese-localised captions and content"],
+    includes: ["Everything in Essential", "Image posts on REDNote (小红书)", "Featured across 2 of our 12 verified REDNote accounts", "WeChat Official Account post — 1.2M reach", "International reach — seen by buyers in Australia and overseas"],
   },
   {
     name: "Premium+",
     price: 1650,
     tagline: "The most powerful way to reach Chinese buyers.",
-    includes: ["Everything in Premium", "Professional video production", "Chinese-language voiceover or subtitles", "Published as video posts on REDNote & WeChat", "WeChat Video Channel distribution"],
+    includes: ["Everything in Premium", "Professional video production", "Chinese-language voiceover or subtitles", "Published as video posts on REDNote & WeChat", "SydneyToday featured article"],
   },
 ];
 
