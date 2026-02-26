@@ -6,9 +6,11 @@ import { createClient } from "@/lib/supabase/client";
 import { STATUS_LABELS, STATUS_COLORS } from "@/lib/supabase/types";
 import type { Listing } from "@/lib/supabase/types";
 import Link from "next/link";
-import { ArrowRight, Eye, MessageSquare, Search, X } from "lucide-react";
+import { ArrowRight, Eye, MessageSquare, Search, X, ChevronDown, ChevronUp } from "lucide-react";
 
 type StatusFilter = Listing["status"] | "all";
+type SortField = "date" | "address" | "agent" | "agency" | "package" | "status";
+type SortDir = "asc" | "desc";
 
 interface ListingWithEmail extends Listing {
   agentEmail?: string;
@@ -18,8 +20,11 @@ interface ListingWithEmail extends Listing {
 export default function StaffListingsPage() {
   const supabase = createClient();
   const [listings, setListings] = useState<ListingWithEmail[]>([]);
+  const [invoiceRefs, setInvoiceRefs] = useState<Record<string, string>>({});
   const [filter, setFilter] = useState<StatusFilter>("all");
   const [search, setSearch] = useState("");
+  const [sortField, setSortField] = useState<SortField>("date");
+  const [sortDir, setSortDir] = useState<SortDir>("desc");
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -44,15 +49,27 @@ export default function StaffListingsPage() {
       }));
 
       setListings(enriched);
+
+      // Also fetch invoice refs keyed by listing_id for search
+      const { data: invData } = await supabase.from("invoices").select("listing_id, invoice_ref");
+      const refMap: Record<string, string> = {};
+      (invData ?? []).forEach((inv) => { if (inv.invoice_ref) refMap[inv.listing_id] = inv.invoice_ref; });
+      setInvoiceRefs(refMap);
+
       setLoading(false);
     }
     load();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  function toggleSort(field: SortField) {
+    if (sortField === field) setSortDir((d) => d === "asc" ? "desc" : "asc");
+    else { setSortField(field); setSortDir("asc"); }
+  }
+
   const filtered = useMemo(() => {
     const q = search.toLowerCase().trim();
-    return listings
+    const base = listings
       .filter((l) => filter === "all" || l.status === filter)
       .filter((l) => {
         if (!q) return true;
@@ -65,6 +82,7 @@ export default function StaffListingsPage() {
           (l.profiles as any)?.agency_name?.toLowerCase().includes(q) ||
           l.id.toLowerCase().includes(q) ||
           l.listing_ref?.toLowerCase().includes(q) ||
+          (invoiceRefs[l.id] ?? "").toLowerCase().includes(q) ||
           l.created_at.slice(0, 10).includes(q) ||
           l.agentEmail?.toLowerCase().includes(q) ||
           l.agentPhone?.toLowerCase().includes(q) ||
@@ -72,7 +90,18 @@ export default function StaffListingsPage() {
           l.price?.toLowerCase().includes(q)
         );
       });
-  }, [listings, filter, search]);
+
+    return [...base].sort((a, b) => {
+      let cmp = 0;
+      if (sortField === "date") cmp = a.created_at.localeCompare(b.created_at);
+      else if (sortField === "address") cmp = a.address.localeCompare(b.address);
+      else if (sortField === "agent") cmp = ((a.profiles as any)?.full_name ?? "").localeCompare((b.profiles as any)?.full_name ?? "");
+      else if (sortField === "agency") cmp = ((a.profiles as any)?.agency_name ?? "").localeCompare((b.profiles as any)?.agency_name ?? "");
+      else if (sortField === "package") cmp = a.package.localeCompare(b.package);
+      else if (sortField === "status") cmp = a.status.localeCompare(b.status);
+      return sortDir === "asc" ? cmp : -cmp;
+    });
+  }, [listings, filter, search, sortField, sortDir, invoiceRefs]);
 
   const statusCounts = useMemo(() =>
     listings.reduce((acc, l) => {
@@ -99,7 +128,7 @@ export default function StaffListingsPage() {
             <Search size={15} className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none" />
             <input
               type="text"
-              placeholder="Search by address, agent, agency, listing ID, date (YYYY-MM-DD), email, phone…"
+              placeholder="Search by address, agent, agency, listing ref, invoice ref, email, phone, date…"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               className="w-full rounded-xl border border-border bg-background pl-10 pr-10 py-2.5 text-sm text-foreground placeholder-muted-foreground outline-none transition-colors focus:border-foreground"
@@ -112,6 +141,25 @@ export default function StaffListingsPage() {
                 <X size={14} />
               </button>
             )}
+          </div>
+
+          {/* Sort controls */}
+          <div className="flex flex-wrap items-center gap-4">
+            <span className="text-xs text-muted-foreground">Sort:</span>
+            {(["date", "address", "agent", "agency", "package", "status"] as SortField[]).map((f) => (
+              <button
+                key={f}
+                onClick={() => toggleSort(f)}
+                className={`flex items-center gap-1 text-xs font-medium transition-colors ${sortField === f ? "text-foreground" : "text-muted-foreground hover:text-foreground"}`}
+              >
+                {f.charAt(0).toUpperCase() + f.slice(1)}
+                {sortField === f ? (
+                  sortDir === "asc" ? <ChevronUp size={12} /> : <ChevronDown size={12} />
+                ) : (
+                  <ChevronDown size={12} className="opacity-30" />
+                )}
+              </button>
+            ))}
           </div>
 
           {/* Status filters */}
