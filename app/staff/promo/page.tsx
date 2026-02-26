@@ -1,5 +1,7 @@
 "use client";
 
+export const dynamic = "force-dynamic";
+
 import { useEffect, useState } from "react";
 import { StaffLayout } from "@/components/staff-layout";
 import { Tag, Plus, Trash2, CheckCircle, Clock, XCircle } from "lucide-react";
@@ -16,12 +18,8 @@ interface PromoCode {
 
 const TZ = "Australia/Sydney";
 
-function sydneyNow(): Date {
-  return new Date(new Date().toLocaleString("en-AU", { timeZone: TZ }));
-}
-
 function promoStatus(p: PromoCode): "active" | "upcoming" | "expired" {
-  const now = sydneyNow();
+  const now = new Date();
   const from = new Date(p.active_from);
   const until = new Date(p.active_until);
   if (now < from) return "upcoming";
@@ -43,13 +41,13 @@ export default function StaffPromoPage() {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
-  const [form, setForm] = useState({
+  const [form, setForm] = useState(() => ({
     code: "",
     discount_percent: "10",
-    active_from: sydneyNow().toISOString().slice(0, 16),
+    active_from: new Date().toISOString().slice(0, 16),
     active_until: "",
-    duration: "7", // days preset
-  });
+    duration: "7",
+  }));
 
   useEffect(() => { fetchPromos(); }, []);
 
@@ -64,7 +62,7 @@ export default function StaffPromoPage() {
   function handleDurationChange(days: string) {
     const d = parseInt(days);
     if (!isNaN(d) && d > 0) {
-      const until = sydneyNow();
+      const until = new Date();
       until.setDate(until.getDate() + d);
       setForm((f) => ({ ...f, duration: days, active_until: until.toISOString().slice(0, 16) }));
     } else {
@@ -94,7 +92,7 @@ export default function StaffPromoPage() {
       } else {
         setSuccess(`Promo code "${data.code}" created.`);
         setShowForm(false);
-        setForm({ code: "", discount_percent: "10", active_from: sydneyNow().toISOString().slice(0, 16), active_until: "", duration: "7" });
+        setForm({ code: "", discount_percent: "10", active_from: new Date().toISOString().slice(0, 16), active_until: "", duration: "7" });
         fetchPromos();
       }
     } catch {
