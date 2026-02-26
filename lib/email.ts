@@ -2,8 +2,7 @@ import { Resend } from "resend";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 const STAFF_EMAIL = process.env.STAFF_EMAIL ?? "marketing@fang.com.au";
-// Use onboarding@resend.dev until fang.com.au domain is verified in Resend
-const FROM = process.env.RESEND_FROM ?? "FANG Portal <onboarding@resend.dev>";
+const FROM = process.env.RESEND_FROM ?? "Fang Agent Portal <portal@agents.fang.com.au>";
 
 // ── Helpers ───────────────────────────────────────────────────
 
