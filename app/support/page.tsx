@@ -117,24 +117,12 @@ export default function SupportPage() {
 
       {/* Quick contact */}
       <section className="border-b border-border">
-        <div className="mx-auto grid max-w-6xl grid-cols-1 gap-px bg-border md:grid-cols-3 border-x border-border">
+        <div className="mx-auto grid max-w-6xl grid-cols-1 gap-px bg-border md:grid-cols-1 border-x border-border">
           {[
             {
               method: "General Enquiries",
               value: "marketing@fang.com.au",
               detail: "Response within 1 business day",
-              href: "mailto:marketing@fang.com.au",
-            },
-            {
-              method: "Listing Issues",
-              value: "marketing@fang.com.au",
-              detail: "Include your listing reference number",
-              href: "mailto:marketing@fang.com.au",
-            },
-            {
-              method: "Billing & Payments",
-              value: "marketing@fang.com.au",
-              detail: "For invoices, payments, and refunds",
               href: "mailto:marketing@fang.com.au",
             },
           ].map((c) => (
