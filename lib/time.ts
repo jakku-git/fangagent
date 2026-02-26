@@ -1,14 +1,33 @@
 const TZ = "Australia/Sydney";
 
-/** Current time as a Date object adjusted to Sydney local time */
+/**
+ * Current time as a Date object adjusted to Sydney local time.
+ * Uses Intl.DateTimeFormat to get the Sydney wall-clock time reliably.
+ */
 export function nowSydney(): Date {
-  return new Date(new Date().toLocaleString("en-AU", { timeZone: TZ }));
+  const now = new Date();
+  // Get individual Sydney time parts
+  const parts = new Intl.DateTimeFormat("en-AU", {
+    timeZone: TZ,
+    year: "numeric", month: "2-digit", day: "2-digit",
+    hour: "2-digit", minute: "2-digit", second: "2-digit",
+    hour12: false,
+  }).formatToParts(now);
+
+  const get = (type: string) => parts.find((p) => p.type === type)?.value ?? "0";
+  const year = parseInt(get("year"));
+  const month = parseInt(get("month")) - 1;
+  const day = parseInt(get("day"));
+  const hour = parseInt(get("hour")) % 24; // guard against "24" edge case
+  const minute = parseInt(get("minute"));
+  const second = parseInt(get("second"));
+
+  return new Date(year, month, day, hour, minute, second);
 }
 
 /**
- * Returns the current UTC ISO string — suitable for DB timestamp comparisons.
- * Supabase stores timestamps in UTC, so we use UTC for DB writes/queries.
- * Sydney-awareness is enforced at the display layer via formatSydney().
+ * Returns the current UTC ISO string for DB writes/comparisons.
+ * Supabase stores all timestamps in UTC — Sydney context is applied at display time.
  */
 export function nowSydneyISO(): string {
   return new Date().toISOString();
@@ -38,6 +57,8 @@ export function formatSydneyDateTime(iso: string): string {
 export function addDaysSydney(days: number): string {
   const d = nowSydney();
   d.setDate(d.getDate() + days);
-  // Format as YYYY-MM-DD using Sydney locale
-  return d.toLocaleDateString("sv-SE"); // sv-SE gives ISO date format
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+  return `${y}-${m}-${day}`;
 }
