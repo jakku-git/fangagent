@@ -1,12 +1,16 @@
+"use client";
+
+import { useState } from "react";
 import { PageLayout } from "@/components/page-layout";
+import { X } from "lucide-react";
 
 const platformStats = [
   {
     platform: "Fang Property Portal",
     metrics: [
       { label: "Registered Members", value: "1.4M" },
-      { label: "Daily Active Users", value: "320K" },
-      { label: "Monthly Page Views", value: "4.2M+" },
+      { label: "Monthly Active Users", value: "250K" },
+      { label: "Overall Network Reach", value: "4.2M+" },
       { label: "Avg. Session Duration", value: "6.4 min" },
     ],
     audience: "Chinese Australians actively searching for property. High purchase intent, high engagement.",
@@ -16,7 +20,7 @@ const platformStats = [
     metrics: [
       { label: "Total Follower Network", value: "1.2M+" },
       { label: "Avg. Open Rate", value: "~85%" },
-      { label: "Coverage", value: "All NSW Metro" },
+      { label: "Coverage", value: "Nationwide" },
       { label: "Account Status", value: "Officially Verified" },
     ],
     audience: "Chinese Australians aged 25–55. Opted-in audience with near-100% message delivery.",
@@ -25,7 +29,7 @@ const platformStats = [
     platform: "REDNote (小红书)",
     metrics: [
       { label: "Fang Accounts", value: "10–12" },
-      { label: "Avg. Post Reach", value: "50K+" },
+      { label: "Avg. Post Reach", value: "2K–3K" },
       { label: "Platform Global Users", value: "300M+" },
       { label: "Partner Status", value: "Official" },
     ],
@@ -34,7 +38,7 @@ const platformStats = [
   {
     platform: "SydneyToday (MediaToday)",
     metrics: [
-      { label: "Daily Readers", value: "870K+" },
+      { label: "Daily Readers", value: "60K+" },
       { label: "Total Network Reach", value: "3.5M" },
       { label: "Publications", value: "6 cities" },
       { label: "Language", value: "Chinese" },
@@ -51,7 +55,7 @@ const adFormats = [
   },
   {
     format: "REDNote Image Post",
-    desc: "Platform-native image post published across 10–12 verified REDNote accounts. Chinese-localised captions and content.",
+    desc: "Platform-native image post published across our verified REDNote accounts. Chinese-localised captions and content.",
     bestFor: "Discovery and early-stage research",
   },
   {
@@ -76,9 +80,117 @@ const adFormats = [
   },
 ];
 
+function MediaKitModal({ onClose }: { onClose: () => void }) {
+  const [form, setForm] = useState({ name: "", phone: "", email: "" });
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setStatus("sending");
+    try {
+      const res = await fetch("/api/media-kit-request", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      if (res.ok) {
+        setStatus("sent");
+      } else {
+        setStatus("error");
+      }
+    } catch {
+      setStatus("error");
+    }
+  }
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={onClose} />
+      <div className="relative w-full max-w-md rounded-2xl bg-background border border-border p-8 shadow-2xl">
+        <button
+          onClick={onClose}
+          className="absolute top-5 right-5 text-muted-foreground hover:text-foreground transition-colors"
+        >
+          <X size={18} />
+        </button>
+
+        {status === "sent" ? (
+          <div className="text-center py-6">
+            <p className="text-lg font-medium text-foreground mb-2">Request received.</p>
+            <p className="text-sm text-muted-foreground">We'll send you the full media kit shortly.</p>
+            <button
+              onClick={onClose}
+              className="mt-8 rounded-full bg-foreground px-6 py-3 text-sm font-medium text-background hover:opacity-80 transition-opacity"
+            >
+              Close
+            </button>
+          </div>
+        ) : (
+          <>
+            <p className="text-xs uppercase tracking-widest text-muted-foreground mb-2">Media Kit</p>
+            <h2 className="text-xl font-medium text-foreground mb-1">Request Full Media Kit</h2>
+            <p className="text-sm text-muted-foreground mb-8">
+              Leave your details and we'll send the full media kit to your inbox.
+            </p>
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div>
+                <label className="block text-xs uppercase tracking-widest text-muted-foreground mb-2">Full Name</label>
+                <input
+                  type="text"
+                  required
+                  value={form.name}
+                  onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
+                  placeholder="Jane Smith"
+                  className="w-full rounded-xl border border-border bg-background px-4 py-3 text-sm text-foreground placeholder-muted-foreground outline-none focus:border-foreground transition-colors"
+                />
+              </div>
+              <div>
+                <label className="block text-xs uppercase tracking-widest text-muted-foreground mb-2">Phone Number</label>
+                <input
+                  type="tel"
+                  required
+                  value={form.phone}
+                  onChange={(e) => setForm((f) => ({ ...f, phone: e.target.value }))}
+                  placeholder="04XX XXX XXX"
+                  className="w-full rounded-xl border border-border bg-background px-4 py-3 text-sm text-foreground placeholder-muted-foreground outline-none focus:border-foreground transition-colors"
+                />
+              </div>
+              <div>
+                <label className="block text-xs uppercase tracking-widest text-muted-foreground mb-2">Email Address</label>
+                <input
+                  type="email"
+                  required
+                  value={form.email}
+                  onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))}
+                  placeholder="jane@agency.com.au"
+                  className="w-full rounded-xl border border-border bg-background px-4 py-3 text-sm text-foreground placeholder-muted-foreground outline-none focus:border-foreground transition-colors"
+                />
+              </div>
+              {status === "error" && (
+                <p className="text-xs text-red-500">Something went wrong. Please try again or email marketing@fang.com.au directly.</p>
+              )}
+              <button
+                type="submit"
+                disabled={status === "sending"}
+                className="w-full rounded-full bg-foreground px-6 py-3 text-sm font-medium text-background hover:opacity-80 transition-opacity disabled:opacity-50 mt-2"
+              >
+                {status === "sending" ? "Sending…" : "Send Request"}
+              </button>
+            </form>
+          </>
+        )}
+      </div>
+    </div>
+  );
+}
+
 export default function MediaKitPage() {
+  const [showModal, setShowModal] = useState(false);
+
   return (
     <PageLayout>
+      {showModal && <MediaKitModal onClose={() => setShowModal(false)} />}
+
       {/* Hero */}
       <section className="border-b border-border">
         <div className="mx-auto max-w-6xl px-6 py-24 md:py-36 lg:py-48">
@@ -89,12 +201,12 @@ export default function MediaKitPage() {
           <p className="mt-10 max-w-xl text-lg leading-relaxed text-muted-foreground">
             Fang.com.au is part of the MediaToday Group — Australia&apos;s largest Chinese media company. This media kit covers our platform reach, audience demographics, and advertising formats.
           </p>
-          <a
-            href="mailto:marketing@fang.com.au?subject=Media Kit Request"
+          <button
+            onClick={() => setShowModal(true)}
             className="mt-10 inline-block rounded-full bg-foreground px-8 py-4 text-sm font-medium text-background transition-opacity hover:opacity-80"
           >
             Request Full Media Kit
-          </a>
+          </button>
         </div>
       </section>
 
@@ -105,7 +217,7 @@ export default function MediaKitPage() {
             { value: "3.5M", label: "Total Network Reach" },
             { value: "1.4M", label: "Fang Registered Members" },
             { value: "1.2M", label: "WeChat Followers" },
-            { value: "870K+", label: "Daily News Readers" },
+            { value: "60K+", label: "Daily News Readers" },
           ].map((stat) => (
             <div key={stat.label} className="px-8 py-12 text-center">
               <p className="text-4xl font-medium md:text-5xl">{stat.value}</p>
@@ -196,12 +308,12 @@ export default function MediaKitPage() {
         <p className="mx-auto mt-6 max-w-md text-muted-foreground leading-relaxed">
           Contact our media team for a full media kit, rate card, and custom campaign proposal.
         </p>
-        <a
-          href="mailto:marketing@fang.com.au?subject=Media Enquiry"
+        <button
+          onClick={() => setShowModal(true)}
           className="mt-10 inline-block rounded-full bg-foreground px-8 py-4 text-sm font-medium text-background transition-opacity hover:opacity-80"
         >
           Contact Media Team
-        </a>
+        </button>
       </section>
     </PageLayout>
   );
