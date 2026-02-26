@@ -134,7 +134,7 @@ const features: (Omit<ChannelDetail, "color"> & { description: string; detail: s
       ],
       stats: [
         { label: "Registered Members", value: "1.4M" },
-        { label: "Daily Active Users", value: "320K" },
+        { label: "Monthly Active Users", value: "250K" },
         { label: "Avg. Monthly Clicks", value: "1,600+" },
         { label: "Avg. Session Time", value: "17 min" },
       ],

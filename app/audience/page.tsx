@@ -2,7 +2,7 @@ import { PageLayout } from "@/components/page-layout";
 
 const audienceStats = [
   { value: "1.4M", label: "Registered Members", detail: "Active accounts on fang.com.au" },
-  { value: "320K", label: "Daily Active Users", detail: "People searching every single day" },
+  { value: "250K", label: "Monthly Active Users", detail: "People actively searching every month" },
   { value: "3.5M", label: "Total Network Reach", detail: "Across the MediaToday ecosystem" },
   { value: "1.2M", label: "WeChat Followers", detail: "Direct inbox access" },
   { value: "300M+", label: "REDNote Global Users", detail: "Platform we have official access to" },

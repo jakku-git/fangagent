@@ -2,7 +2,7 @@
 
 const stats = [
   { label: "Registered Members", value: "1.4M" },
-  { label: "Daily Active Users", value: "320K" },
+  { label: "Monthly Active Users", value: "250K" },
   { label: "Total Network Audience", value: "3.5M" },
   { label: "Years in Market", value: "5+" },
 ];

@@ -68,7 +68,7 @@ export default function AboutPage() {
         <div className="mx-auto grid max-w-6xl grid-cols-2 divide-x divide-background/10 md:grid-cols-4">
           {[
             { value: "1.4M", label: "Registered Members" },
-            { value: "320K", label: "Daily Active Users" },
+            { value: "250K", label: "Monthly Active Users" },
             { value: "3.5M", label: "Total Network Reach" },
             { value: "5+", label: "Years in Market" },
           ].map((stat) => (
