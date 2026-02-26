@@ -64,8 +64,8 @@ export function TechnologySection() {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [textProgress, setTextProgress] = useState(0);
   
-  const hookText = "When a Chinese buyer in Sydney, Melbourne, or overseas wants to find Australian property, they don't open Google.";
-  const bodyText = "They open WeChat. They scroll REDNote. They check the Fang app. FANG.COM.AU is the only platform that connects you to all three, including the 1.4 million registered members who use them every day.";
+  const hookText = "When a Chinese buyer in Sydney, Melbourne, Brisbane or overseas wants to find Australian property, they don't open Google.";
+  const bodyText = "They open WeChat. They scroll REDNote. They check Fang. FANG.COM.AU is the only platform that connects you to all three, including the 1.4 million registered members across our own networks.";
 
   useEffect(() => {
     const handleScroll = () => {
