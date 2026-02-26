@@ -11,7 +11,6 @@ export const metadata: Metadata = {
   title: 'FANG.COM.AU | Chinese Real Estate',
   description: 'Australia\'s Largest Chinese real estate platform',
   icons: {
-    icon: '/favicon.ico',
     apple: '/fangapplogo.png',
   },
 }

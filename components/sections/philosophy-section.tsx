@@ -151,7 +151,7 @@ export function PhilosophySection() {
 
         {/* Video */}
         <div className="relative aspect-video w-full">
-          <video autoPlay loop muted playsInline className="absolute inset-0 h-full w-full object-cover" src="/media/videos/fangvid.webm" />
+          <video autoPlay loop muted playsInline className="absolute inset-0 h-full w-full object-cover" src="https://ljbajzpevhwgtkpdcllf.supabase.co/storage/v1/object/public/webm/fangvid.webm" />
         </div>
 
         {/* Description */}
@@ -184,7 +184,7 @@ export function PhilosophySection() {
       {/* ── DESKTOP: video + description + stats ── */}
       {/* Video */}
       <div className="relative hidden md:block aspect-[21/9] w-full">
-        <video autoPlay loop muted playsInline className="absolute inset-0 h-full w-full object-cover" src="/media/videos/fangvid.webm" />
+        <video autoPlay loop muted playsInline className="absolute inset-0 h-full w-full object-cover" src="https://ljbajzpevhwgtkpdcllf.supabase.co/storage/v1/object/public/webm/fangvid.webm" />
       </div>
 
       {/* Description */}
