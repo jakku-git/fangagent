@@ -91,6 +91,9 @@ export interface Invoice {
   package: string;
   address: string;
   amount: number;
+  original_amount: number | null;
+  discount_percent: number | null;
+  promo_code: string | null;
   status: "unpaid" | "remittance_uploaded" | "paid" | "overdue";
   due_date: string;
   paid_at: string | null;
@@ -134,9 +137,9 @@ export interface CreditApplication {
 }
 
 export const PACKAGE_PRICES: Record<string, number> = {
-  Essential: 425,
-  Premium: 750,
-  "Premium+": 1250,
+  Essential: 475,
+  Premium: 880,
+  "Premium+": 1650,
 };
 
 export const STATUS_LABELS: Record<string, string> = {

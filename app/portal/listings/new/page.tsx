@@ -64,6 +64,12 @@ export default function NewListingPage() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
+  // Promo code
+  const [promoInput, setPromoInput] = useState("");
+  const [promoLoading, setPromoLoading] = useState(false);
+  const [promoResult, setPromoResult] = useState<{ code: string; discount_percent: number } | null>(null);
+  const [promoError, setPromoError] = useState("");
+
   function update(field: string, value: string) {
     setForm((f) => ({ ...f, [field]: value }));
   }
@@ -86,6 +92,30 @@ export default function NewListingPage() {
     );
   }
 
+  async function applyPromo() {
+    if (!promoInput.trim()) return;
+    setPromoLoading(true);
+    setPromoError("");
+    setPromoResult(null);
+    try {
+      const res = await fetch("/api/promo/validate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ code: promoInput.trim() }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        setPromoError(data.error ?? "Invalid promo code.");
+      } else {
+        setPromoResult(data);
+      }
+    } catch {
+      setPromoError("Could not validate code.");
+    } finally {
+      setPromoLoading(false);
+    }
+  }
+
   function next() {
     if (step === 0 && !selectedPackage) return;
     setStep((s) => s + 1);
@@ -106,6 +136,7 @@ export default function NewListingPage() {
           ...form,
           openHomeTimes,
           features: selectedFeatures,
+          promoCode: promoResult?.code ?? null,
         }),
       });
       const data = await res.json();
@@ -169,35 +200,83 @@ export default function NewListingPage() {
           {step === 0 && (
             <div className="space-y-4">
               <h2 className="text-base font-medium text-foreground mb-2">Choose a package</h2>
-              {packages.map((pkg) => (
-                <label
-                  key={pkg.name}
-                  className={`flex cursor-pointer gap-4 rounded-xl border p-5 transition-colors ${selectedPackage === pkg.name ? "border-foreground bg-zinc-50" : "border-border hover:border-foreground/30"}`}
-                >
-                  <input
-                    type="radio"
-                    name="package"
-                    value={pkg.name}
-                    checked={selectedPackage === pkg.name}
-                    onChange={() => setSelectedPackage(pkg.name)}
-                    className="mt-1 accent-foreground"
-                  />
-                  <div className="flex-1">
-                    <div className="flex items-center justify-between mb-1">
-                      <p className="font-medium text-foreground">{pkg.name}</p>
-                      <p className="text-sm font-medium text-foreground">${pkg.price} <span className="text-xs text-muted-foreground font-normal">inc. GST</span></p>
+              {packages.map((pkg) => {
+                const discountedPrice = promoResult
+                  ? Math.round(pkg.price * (1 - promoResult.discount_percent / 100))
+                  : null;
+                return (
+                  <label
+                    key={pkg.name}
+                    className={`flex cursor-pointer gap-4 rounded-xl border p-5 transition-colors ${selectedPackage === pkg.name ? "border-foreground bg-zinc-50" : "border-border hover:border-foreground/30"}`}
+                  >
+                    <input
+                      type="radio"
+                      name="package"
+                      value={pkg.name}
+                      checked={selectedPackage === pkg.name}
+                      onChange={() => setSelectedPackage(pkg.name)}
+                      className="mt-1 accent-foreground"
+                    />
+                    <div className="flex-1">
+                      <div className="flex items-center justify-between mb-1">
+                        <p className="font-medium text-foreground">{pkg.name}</p>
+                        <div className="text-right">
+                          {discountedPrice ? (
+                            <div className="flex items-center gap-2">
+                              <span className="text-xs text-muted-foreground line-through">${pkg.price}</span>
+                              <span className="text-sm font-semibold text-green-600">${discountedPrice} <span className="text-xs font-normal">inc. GST</span></span>
+                            </div>
+                          ) : (
+                            <p className="text-sm font-medium text-foreground">${pkg.price} <span className="text-xs text-muted-foreground font-normal">inc. GST</span></p>
+                          )}
+                        </div>
+                      </div>
+                      <p className="text-xs text-muted-foreground mb-3">{pkg.tagline}</p>
+                      <ul className="space-y-1">
+                        {pkg.includes.map((item) => (
+                          <li key={item} className="flex items-start gap-2 text-xs text-muted-foreground">
+                            <span className="mt-0.5 text-foreground">✓</span> {item}
+                          </li>
+                        ))}
+                      </ul>
                     </div>
-                    <p className="text-xs text-muted-foreground mb-3">{pkg.tagline}</p>
-                    <ul className="space-y-1">
-                      {pkg.includes.map((item) => (
-                        <li key={item} className="flex items-start gap-2 text-xs text-muted-foreground">
-                          <span className="mt-0.5 text-foreground">✓</span> {item}
-                        </li>
-                      ))}
-                    </ul>
+                  </label>
+                );
+              })}
+
+              {/* Promo code */}
+              <div className="mt-6 rounded-xl border border-border p-5">
+                <p className="text-xs uppercase tracking-widest text-muted-foreground mb-3">Promo Code</p>
+                {promoResult ? (
+                  <div className="flex items-center justify-between rounded-lg bg-green-50 border border-green-200 px-4 py-3">
+                    <div>
+                      <p className="text-sm font-medium text-green-800">{promoResult.code} — {promoResult.discount_percent}% off applied</p>
+                      <p className="text-xs text-green-600 mt-0.5">Discount will be reflected in your invoice.</p>
+                    </div>
+                    <button type="button" onClick={() => { setPromoResult(null); setPromoInput(""); }} className="text-xs text-green-700 underline ml-4">Remove</button>
                   </div>
-                </label>
-              ))}
+                ) : (
+                  <div className="flex gap-2">
+                    <input
+                      type="text"
+                      value={promoInput}
+                      onChange={(e) => { setPromoInput(e.target.value.toUpperCase()); setPromoError(""); }}
+                      onKeyDown={(e) => e.key === "Enter" && (e.preventDefault(), applyPromo())}
+                      placeholder="Enter promo code"
+                      className="flex-1 rounded-xl border border-border bg-background px-4 py-2.5 text-sm text-foreground placeholder-muted-foreground outline-none focus:border-foreground uppercase"
+                    />
+                    <button
+                      type="button"
+                      onClick={applyPromo}
+                      disabled={promoLoading || !promoInput.trim()}
+                      className="rounded-xl bg-foreground px-4 py-2.5 text-sm font-medium text-background disabled:opacity-50"
+                    >
+                      {promoLoading ? "..." : "Apply"}
+                    </button>
+                  </div>
+                )}
+                {promoError && <p className="mt-2 text-xs text-red-500">{promoError}</p>}
+              </div>
             </div>
           )}
 

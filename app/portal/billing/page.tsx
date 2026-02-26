@@ -43,7 +43,17 @@ function InvoiceRow({
           </div>
         </div>
         <div className="ml-4 flex items-center gap-3 flex-shrink-0">
-          <span className="text-sm font-medium text-foreground">${invoice.amount}</span>
+          <div className="text-right">
+            {invoice.original_amount && invoice.discount_percent ? (
+              <div>
+                <span className="text-xs text-muted-foreground line-through block">${invoice.original_amount}</span>
+                <span className="text-sm font-semibold text-green-600">${invoice.amount}</span>
+                <span className="ml-1 text-xs text-green-600">({invoice.discount_percent}% off)</span>
+              </div>
+            ) : (
+              <span className="text-sm font-medium text-foreground">${invoice.amount}</span>
+            )}
+          </div>
           {invoice.status === "paid" && (
             <button className="flex items-center gap-1.5 rounded-lg border border-border px-3 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground">
               <Download size={12} /> Invoice

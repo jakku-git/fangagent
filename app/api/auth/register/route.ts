@@ -13,14 +13,18 @@ export async function POST(req: NextRequest) {
 
     const supabase = createServiceClient();
 
+    // Auto-assign staff role for @fang.com.au emails
+    const isStaff = email.toLowerCase().endsWith("@fang.com.au");
+    const role = isStaff ? "staff" : "agent";
+
     // Create auth user with metadata
     const { data: authData, error: authError } = await supabase.auth.admin.createUser({
       email,
       password,
-      email_confirm: true, // auto-confirm for now
+      email_confirm: true,
       user_metadata: {
         full_name: fullName,
-        role: "agent",
+        role,
       },
     });
 
@@ -34,7 +38,8 @@ export async function POST(req: NextRequest) {
     const { error: profileError } = await supabase
       .from("profiles")
       .update({
-        account_type: accountType,
+        role,
+        account_type: isStaff ? "agent" : accountType,
         full_name: fullName,
         agency_name: agencyName,
         phone,

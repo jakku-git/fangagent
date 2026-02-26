@@ -13,6 +13,7 @@ export async function POST(req: NextRequest) {
       propertyType, features,
       description, openHomeTimes, agentNotes, listingUrl,
       auctionDate, vendorInstructions,
+      promoCode,
     } = body;
 
     const supabase = createServiceClient();
@@ -56,8 +57,28 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: listingError.message }, { status: 500 });
     }
 
+    // Validate promo code if provided
+    let discountPercent = 0;
+    let validatedPromoCode: string | null = null;
+    if (promoCode) {
+      const now = new Date().toISOString();
+      const { data: promo } = await supabase
+        .from("promo_codes")
+        .select("code, discount_percent")
+        .eq("code", promoCode.toUpperCase().trim())
+        .lte("active_from", now)
+        .gte("active_until", now)
+        .single();
+      if (promo) {
+        discountPercent = promo.discount_percent;
+        validatedPromoCode = promo.code;
+      }
+    }
+
     // Create invoice
-    const amount = PACKAGE_PRICES[pkg] ?? 0;
+    const baseAmount = PACKAGE_PRICES[pkg] ?? 0;
+    const discountAmount = Math.round(baseAmount * discountPercent / 100);
+    const amount = baseAmount - discountAmount;
     const dueDate = new Date();
     dueDate.setDate(dueDate.getDate() + 7);
 
@@ -69,6 +90,9 @@ export async function POST(req: NextRequest) {
         package: pkg,
         address: `${address}, ${suburb}`,
         amount,
+        original_amount: discountPercent > 0 ? baseAmount : null,
+        discount_percent: discountPercent > 0 ? discountPercent : null,
+        promo_code: validatedPromoCode,
         status: "unpaid",
         due_date: dueDate.toISOString().slice(0, 10),
       })
@@ -93,6 +117,9 @@ export async function POST(req: NextRequest) {
         suburb,
         package: pkg,
         amount,
+        originalAmount: discountPercent > 0 ? baseAmount : undefined,
+        discountPercent: discountPercent > 0 ? discountPercent : undefined,
+        promoCode: validatedPromoCode ?? undefined,
         dueDate: dueDate.toISOString().slice(0, 10),
       }).catch(console.error);
     }

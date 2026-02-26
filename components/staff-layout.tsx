@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { useAuth } from "@/lib/auth-context";
-import { LayoutDashboard, FileText, Users, Plug, CreditCard, LogOut, Menu, X } from "lucide-react";
+import { LayoutDashboard, FileText, Users, Plug, CreditCard, Tag, LogOut, Menu, X } from "lucide-react";
 
 const navItems = [
   { href: "/staff", label: "Dashboard", icon: LayoutDashboard, exact: true },
@@ -13,6 +13,7 @@ const navItems = [
   { href: "/staff/agents", label: "Agents", icon: Users },
   { href: "/staff/integrations", label: "CRM Requests", icon: Plug },
   { href: "/staff/credit", label: "Credit Applications", icon: CreditCard },
+  { href: "/staff/promo", label: "Promo Codes", icon: Tag },
 ];
 
 export function StaffLayout({ children }: { children: React.ReactNode }) {
