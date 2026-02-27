@@ -98,7 +98,30 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }
 
   async function logout() {
-    await supabase.auth.signOut();
+    try {
+      // Race signOut against a 5s timeout — the lock can hang if multiple tabs are open
+      await Promise.race([
+        supabase.auth.signOut(),
+        new Promise<void>((_, reject) =>
+          setTimeout(() => reject(new Error("signOut timeout")), 5000)
+        ),
+      ]);
+    } catch {
+      // Lock timed out or signOut failed — manually clear all Supabase auth storage
+      // so the user is effectively logged out in this tab regardless
+      const prefix = "sb-ljbajzpevhwgtkpdcllf-auth";
+      Object.keys(localStorage)
+        .filter((k) => k.startsWith(prefix))
+        .forEach((k) => localStorage.removeItem(k));
+      Object.keys(sessionStorage)
+        .filter((k) => k.startsWith(prefix))
+        .forEach((k) => sessionStorage.removeItem(k));
+    } finally {
+      // Always clear local state and redirect
+      setUser(null);
+      setProfile(null);
+      setListings([]);
+    }
   }
 
   async function refreshProfile() {

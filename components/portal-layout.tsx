@@ -38,7 +38,8 @@ export function PortalLayout({ children }: { children: React.ReactNode }) {
 
   async function handleLogout() {
     await logout();
-    router.push("/");
+    // Hard navigate to bust any stale lock state across tabs
+    window.location.href = "/";
   }
 
   function isActive(item: typeof navItems[0]) {
