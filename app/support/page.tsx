@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { PageLayout } from "@/components/page-layout";
-import { Plus, Minus } from "lucide-react";
+import { Plus, Minus, X } from "lucide-react";
 
 const topics = [
   {
@@ -99,9 +99,121 @@ function SupportItem({ q, a }: { q: string; a: string }) {
   );
 }
 
+function SupportModal({ onClose }: { onClose: () => void }) {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [sent, setSent] = useState(false);
+  const [error, setError] = useState("");
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setLoading(true);
+    setError("");
+    try {
+      const res = await fetch("/api/support-contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, message }),
+      });
+      if (!res.ok) throw new Error();
+      setSent(true);
+    } catch {
+      setError("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
+      <div className="relative w-full max-w-md rounded-2xl bg-background border border-border p-8 shadow-xl">
+        <button
+          onClick={onClose}
+          className="absolute right-5 top-5 text-muted-foreground hover:text-foreground transition-colors"
+        >
+          <X size={18} />
+        </button>
+
+        {sent ? (
+          <div className="py-6 text-center">
+            <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-green-50">
+              <svg className="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            <h3 className="text-lg font-medium text-foreground mb-2">Message sent</h3>
+            <p className="text-sm text-muted-foreground">Our team will get back to you within one business day.</p>
+            <button
+              onClick={onClose}
+              className="mt-6 rounded-full bg-foreground px-6 py-2.5 text-sm font-medium text-background hover:opacity-80 transition-opacity"
+            >
+              Done
+            </button>
+          </div>
+        ) : (
+          <>
+            <h3 className="text-lg font-medium text-foreground mb-1">Contact Support</h3>
+            <p className="text-sm text-muted-foreground mb-6">We&apos;ll respond within one business day.</p>
+
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div>
+                <label className="block text-xs font-medium text-foreground mb-1.5">Name</label>
+                <input
+                  type="text"
+                  required
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  placeholder="Your name"
+                  className="w-full rounded-xl border border-border bg-background px-4 py-2.5 text-sm text-foreground placeholder-muted-foreground outline-none focus:border-foreground transition-colors"
+                />
+              </div>
+              <div>
+                <label className="block text-xs font-medium text-foreground mb-1.5">Email</label>
+                <input
+                  type="email"
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="your@email.com"
+                  className="w-full rounded-xl border border-border bg-background px-4 py-2.5 text-sm text-foreground placeholder-muted-foreground outline-none focus:border-foreground transition-colors"
+                />
+              </div>
+              <div>
+                <label className="block text-xs font-medium text-foreground mb-1.5">Message</label>
+                <textarea
+                  required
+                  rows={4}
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  placeholder="Describe your issue or question…"
+                  className="w-full rounded-xl border border-border bg-background px-4 py-2.5 text-sm text-foreground placeholder-muted-foreground outline-none focus:border-foreground transition-colors resize-none"
+                />
+              </div>
+
+              {error && <p className="text-xs text-red-600">{error}</p>}
+
+              <button
+                type="submit"
+                disabled={loading}
+                className="w-full rounded-full bg-foreground py-3 text-sm font-medium text-background transition-opacity hover:opacity-80 disabled:opacity-50"
+              >
+                {loading ? "Sending…" : "Send Message"}
+              </button>
+            </form>
+          </>
+        )}
+      </div>
+    </div>
+  );
+}
+
 export default function SupportPage() {
+  const [showModal, setShowModal] = useState(false);
   return (
     <PageLayout>
+      {showModal && <SupportModal onClose={() => setShowModal(false)} />
       {/* Hero */}
       <section className="border-b border-border">
         <div className="mx-auto max-w-6xl px-6 py-24 md:py-36">
@@ -118,22 +230,16 @@ export default function SupportPage() {
       {/* Quick contact */}
       <section className="border-b border-border">
         <div className="mx-auto grid max-w-6xl grid-cols-1 gap-px bg-border md:grid-cols-1 border-x border-border">
-          {[
-            {
-              method: "General Enquiries",
-              value: "marketing@fang.com.au",
-              detail: "Response within 1 business day",
-              href: "mailto:marketing@fang.com.au",
-            },
-          ].map((c) => (
-            <div key={c.method} className="bg-background px-8 py-10">
-              <p className="text-xs uppercase tracking-widest text-muted-foreground mb-3">{c.method}</p>
-              <a href={c.href} className="text-lg font-medium text-foreground hover:underline underline-offset-4">
-                {c.value}
-              </a>
-              <p className="mt-2 text-xs text-muted-foreground">{c.detail}</p>
-            </div>
-          ))}
+          <div className="bg-background px-8 py-10">
+            <p className="text-xs uppercase tracking-widest text-muted-foreground mb-3">General Enquiries</p>
+            <button
+              onClick={() => setShowModal(true)}
+              className="text-lg font-medium text-foreground hover:underline underline-offset-4"
+            >
+              marketing@fang.com.au
+            </button>
+            <p className="mt-2 text-xs text-muted-foreground">Response within 1 business day</p>
+          </div>
         </div>
       </section>
 
@@ -161,12 +267,12 @@ export default function SupportPage() {
         <p className="mx-auto mt-6 max-w-md text-background/60 leading-relaxed">
           Our support team is available Monday to Friday, 9am–6pm AEST. We aim to respond to all enquiries within one business day.
         </p>
-        <a
-          href="mailto:marketing@fang.com.au"
+        <button
+          onClick={() => setShowModal(true)}
           className="mt-10 inline-block rounded-full border border-background px-8 py-4 text-sm font-medium text-background transition-all hover:bg-background hover:text-foreground"
         >
           Email Support
-        </a>
+        </button>
       </section>
     </PageLayout>
   );
