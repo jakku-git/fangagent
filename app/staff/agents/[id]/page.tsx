@@ -8,9 +8,10 @@ import type { Profile, Listing, Invoice } from "@/lib/supabase/types";
 import Link from "next/link";
 import { ArrowLeft, ArrowRight, CheckCircle } from "lucide-react";
 
+const supabase = createClient();
+
 export default function StaffAgentDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
-  const supabase = createClient();
 
   const [profile, setProfile] = useState<Profile | null>(null);
   const [listings, setListings] = useState<Listing[]>([]);
@@ -187,8 +188,8 @@ export default function StaffAgentDetailPage({ params }: { params: Promise<{ id:
                   {invoices.map((inv) => (
                     <div key={inv.id} className="flex items-center justify-between rounded-lg border border-border px-4 py-3">
                       <div>
-                        <p className="text-sm font-medium text-foreground font-mono">{inv.id.slice(0, 8)}…</p>
-                        <p className="text-xs text-muted-foreground">{inv.package} · Due {inv.due_date}</p>
+                        <p className="text-sm font-medium text-foreground font-mono">{inv.invoice_ref ?? inv.id.slice(0, 8)}</p>
+                        <p className="text-xs text-muted-foreground">{inv.package} · Due {inv.due_date?.slice(0, 10)}</p>
                       </div>
                       <div className="flex items-center gap-3">
                         <span className="text-sm font-medium text-foreground">${inv.amount}</span>

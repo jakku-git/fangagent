@@ -284,7 +284,7 @@ export default function MediaKitPage() {
           </div>
           <div className="space-y-8">
             {[
-              { label: "Primary Age Range", value: "28–55 years" },
+              { label: "Primary Age Range", value: "24–65 years" },
               { label: "Primary Location", value: "Greater Sydney, Melbourne, Brisbane" },
               { label: "Language", value: "Mandarin and Cantonese" },
               { label: "Buyer Type", value: "Owner-occupier, investor, offshore" },

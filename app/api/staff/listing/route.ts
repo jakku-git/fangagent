@@ -23,16 +23,15 @@ export async function PATCH(req: NextRequest) {
       .from("listings")
       .update(updates)
       .eq("id", listingId)
-      .select("*, profiles(full_name, agency_name)")
+      .select("*, profiles(full_name, agency_name, email)")
       .single();
 
     if (error) {
       return NextResponse.json({ error: error.message }, { status: 500 });
     }
 
-    const agentName = (listing.profiles as { full_name: string })?.full_name ?? "Agent";
-    const { data: userData } = await supabase.auth.admin.getUserById(listing.agent_id);
-    const agentEmail = userData?.user?.email ?? "";
+    const agentName = (listing.profiles as { full_name: string; email?: string })?.full_name ?? "Agent";
+    const agentEmail = (listing.profiles as { full_name: string; email?: string })?.email ?? "";
 
     // If just went live, send the dedicated "listing is live" email
     if (status === "live") {

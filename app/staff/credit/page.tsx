@@ -6,8 +6,9 @@ import { createClient } from "@/lib/supabase/client";
 import type { CreditApplication } from "@/lib/supabase/types";
 import { CheckCircle, Clock, XCircle, FileText, ExternalLink } from "lucide-react";
 
+const supabase = createClient();
+
 export default function StaffCreditPage() {
-  const supabase = createClient();
   const [applications, setApplications] = useState<CreditApplication[]>([]);
   const [limitInputs, setLimitInputs] = useState<Record<string, string>>({});
   const [saving, setSaving] = useState<string | null>(null);

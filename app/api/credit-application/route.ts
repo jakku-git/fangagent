@@ -15,15 +15,14 @@ export async function POST(req: NextRequest) {
 
     const supabase = createServiceClient();
 
-    // Get agent profile
+    // Get agent profile (email stored in profiles column)
     const { data: profile } = await supabase
       .from("profiles")
-      .select("full_name, agency_name, phone, account_type")
+      .select("full_name, agency_name, phone, account_type, email")
       .eq("id", agentId)
       .single();
 
-    const { data: userData } = await supabase.auth.admin.getUserById(agentId);
-    const agentEmail = userData?.user?.email ?? "";
+    const agentEmail = profile?.email ?? "";
 
     // Upload file to storage if provided
     let fileUrl = "";

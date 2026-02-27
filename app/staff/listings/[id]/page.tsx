@@ -9,9 +9,10 @@ import Link from "next/link";
 import { ArrowLeft, CheckCircle, ExternalLink, Eye, MessageSquare, Bookmark, Clock, Edit2, XCircle } from "lucide-react";
 import type { ListingRequest } from "@/lib/supabase/types";
 
+const supabase = createClient();
+
 export default function StaffListingDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
-  const supabase = createClient();
   const [listing, setListing] = useState<Listing | null>(null);
   const [loading, setLoading] = useState(true);
   const [requests, setRequests] = useState<ListingRequest[]>([]);
@@ -72,10 +73,11 @@ export default function StaffListingDetailPage({ params }: { params: Promise<{ i
 
   async function handleRequestResponse(reqId: string, newStatus: "approved" | "rejected") {
     setSavingRequest(true);
-    await supabase
-      .from("listing_requests")
-      .update({ status: newStatus, staff_notes: staffNotes || null })
-      .eq("id", reqId);
+    await fetch("/api/staff/listing-request", {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ requestId: reqId, status: newStatus, staffNotes: staffNotes || null }),
+    });
     // Refresh requests
     const { data } = await supabase
       .from("listing_requests")
@@ -453,7 +455,7 @@ export default function StaffListingDetailPage({ params }: { params: Promise<{ i
             </div>
 
             <Link
-              href={`/staff/agents/${listing.agentId}`}
+              href={`/staff/agents/${listing.agent_id}`}
               className="flex items-center justify-between rounded-xl border border-border bg-background px-4 py-3 text-sm transition-colors hover:bg-zinc-50"
             >
               <span className="text-muted-foreground">View Agent Profile</span>

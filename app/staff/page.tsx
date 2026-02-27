@@ -8,8 +8,9 @@ import type { Listing, CrmRequest, CreditApplication } from "@/lib/supabase/type
 import Link from "next/link";
 import { ArrowRight, FileText, Users, AlertCircle, TrendingUp } from "lucide-react";
 
+const supabase = createClient();
+
 export default function StaffDashboard() {
-  const supabase = createClient();
   const [listings, setListings] = useState<Listing[]>([]);
   const [pendingCRM, setPendingCRM] = useState<CrmRequest[]>([]);
   const [pendingCredit, setPendingCredit] = useState<CreditApplication[]>([]);

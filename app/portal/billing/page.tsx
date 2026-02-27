@@ -7,6 +7,9 @@ import { createClient } from "@/lib/supabase/client";
 import type { Invoice } from "@/lib/supabase/types";
 import { Download, CheckCircle, FileText, AlertCircle, Upload, Paperclip, X, CreditCard, ExternalLink } from "lucide-react";
 
+// Singleton client — avoids recreating on every render
+const supabase = createClient();
+
 function InvoiceRow({
   invoice,
   remittanceFile,
@@ -129,7 +132,6 @@ function InvoiceRow({
 
 export default function BillingPage() {
   const { user, profile } = useAuth();
-  const supabase = createClient();
   const [invoices, setInvoices] = useState<Invoice[]>([]);
   const [remittanceFiles, setRemittanceFiles] = useState<Record<string, File>>({});
   const [submittedRemittances, setSubmittedRemittances] = useState<string[]>([]);
@@ -150,7 +152,8 @@ export default function BillingPage() {
       .eq("agent_id", user.id)
       .order("created_at", { ascending: false })
       .then(({ data }) => setInvoices((data as Invoice[]) ?? []));
-  }, [user, supabase]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user]);
 
   const unpaid = invoices.filter((i) => i.status === "unpaid" || i.status === "remittance_uploaded");
   const paid = invoices.filter((i) => i.status === "paid");

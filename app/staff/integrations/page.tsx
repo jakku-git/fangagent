@@ -6,8 +6,9 @@ import { createClient } from "@/lib/supabase/client";
 import type { CrmRequest } from "@/lib/supabase/types";
 import { CheckCircle, Clock, XCircle } from "lucide-react";
 
+const supabase = createClient();
+
 export default function StaffIntegrationsPage() {
-  const supabase = createClient();
   const [requests, setRequests] = useState<CrmRequest[]>([]);
   const [saving, setSaving] = useState<string | null>(null);
 

@@ -16,8 +16,9 @@ type SortField = "name" | "agency" | "joined" | "listings" | "spend";
 type SortDir = "asc" | "desc";
 type GroupMode = "none" | "agency";
 
+const supabase = createClient();
+
 export default function StaffAgentsPage() {
-  const supabase = createClient();
   const [agents, setAgents] = useState<AgentRow[]>([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");

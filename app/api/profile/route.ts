@@ -44,10 +44,15 @@ export async function PATCH(req: NextRequest) {
 
     // If profile assets were uploaded, notify staff
     if (updates.profilePhotoUrl || updates.agencyLogoUrl) {
-      const { data: userData } = await supabase.auth.admin.getUserById(agentId);
+      // Use email from profiles table — already updated above
+      const { data: profileData } = await supabase
+        .from("profiles")
+        .select("email")
+        .eq("id", agentId)
+        .single();
       await sendProfileAssetsEmail({
         agentName: updates.fullName ?? "",
-        agentEmail: userData?.user?.email ?? "",
+        agentEmail: profileData?.email ?? "",
         agencyName: updates.agencyName ?? "",
         profilePhotoUrl: updates.profilePhotoUrl ?? null,
         agencyLogoUrl: updates.agencyLogoUrl ?? null,

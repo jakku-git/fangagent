@@ -265,7 +265,7 @@ const features: (Omit<ChannelDetail, "color"> & { description: string; detail: s
     title: "The MediaToday Network",
     subtitle: "Australia's largest Chinese media group",
     description: "Australia's largest Chinese media group",
-    detail: "Fang is backed by MediaToday Group — Australia's largest Chinese media company — which also operates SydneyToday, QLDToday, WAToday, Melbourne Today, uMall, and more.",
+    detail: "Fang is backed by MediaToday Group — Australia's largest Chinese media company — which also operates SydneyToday, QLDToday, WAToday, MelbourneToday, UMall, and more.",
     image: "/media/images/mediatoday.webp",
     portrait: true,
     hook: "",
@@ -327,7 +327,7 @@ export function FeaturedProductsSection() {
           One Ecosystem.
         </h2>
         <p className="mx-auto mt-4 max-w-xl text-sm text-muted-foreground">
-          Chinese buyers don&apos;t use the same internet as everyone else. Here&apos;s every platform we use to reach them — and why each one matters.
+          Chinese buyers don&apos;t use the same internet as everyone else. Here&apos;s every platform we use to reach them. nd why each one matters.
         </p>
       </div>
 

@@ -22,13 +22,11 @@ export async function POST(req: NextRequest) {
     // Get agent profile for email
     const { data: profile } = await supabase
       .from("profiles")
-      .select("full_name, agency_name, id, billing_type")
+      .select("full_name, agency_name, id, billing_type, email")
       .eq("id", agentId)
       .single();
 
-    // Get agent email from auth
-    const { data: userData } = await supabase.auth.admin.getUserById(agentId);
-    const agentEmail = userData?.user?.email ?? "";
+    const agentEmail = profile?.email ?? "";
 
     // Create listing
     const { data: listing, error: listingError } = await supabase

@@ -23,16 +23,14 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Listing not found." }, { status: 404 });
     }
 
-    // Get agent profile
+    // Get agent profile (email stored in profiles)
     const { data: profile } = await supabase
       .from("profiles")
-      .select("full_name, agency_name")
+      .select("full_name, agency_name, email")
       .eq("id", agentId)
       .single();
 
-    // Get agent email
-    const { data: userData } = await supabase.auth.admin.getUserById(agentId);
-    const agentEmail = userData?.user?.email ?? "";
+    const agentEmail = profile?.email ?? "";
 
     // Insert request
     const { error: insertError } = await supabase

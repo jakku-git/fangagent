@@ -17,8 +17,9 @@ interface ListingWithEmail extends Listing {
   agentPhone?: string;
 }
 
+const supabase = createClient();
+
 export default function StaffListingsPage() {
-  const supabase = createClient();
   const [listings, setListings] = useState<ListingWithEmail[]>([]);
   const [invoiceRefs, setInvoiceRefs] = useState<Record<string, string>>({});
   const [filter, setFilter] = useState<StatusFilter>("all");

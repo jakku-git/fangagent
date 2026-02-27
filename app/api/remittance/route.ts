@@ -67,15 +67,13 @@ export async function POST(req: NextRequest) {
 
     const { data: profile } = await supabase
       .from("profiles")
-      .select("full_name, agency_name")
+      .select("full_name, agency_name, email")
       .eq("id", agentId)
       .single();
 
-    const { data: userData } = await supabase.auth.admin.getUserById(agentId);
-
     await sendRemittanceEmail({
       agentName: profile?.full_name ?? "Unknown",
-      agentEmail: userData?.user?.email ?? "",
+      agentEmail: profile?.email ?? "",
       agencyName: profile?.agency_name ?? "",
       invoiceId,
       invoiceRef: (invoice as any)?.invoice_ref ?? undefined,

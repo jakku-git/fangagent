@@ -90,7 +90,7 @@ export function PhilosophySection() {
                 />
                 <div className="absolute bottom-6 left-6 right-6">
                   <span className="backdrop-blur-md px-4 py-2 text-sm font-medium rounded-full bg-[rgba(255,255,255,0.2)] text-white">
-                    REDNote (小红书) — China&apos;s Instagram
+                    REDNote (小红书) — China&apos;s Facebook/Instagram/X/Reddit/Pinterest/Google Combined.
                   </span>
                 </div>
               </div>
@@ -113,7 +113,7 @@ export function PhilosophySection() {
                 />
                 <div className="absolute bottom-6 left-6 right-6">
                   <span className="backdrop-blur-md px-4 py-2 text-sm font-medium rounded-full bg-[rgba(255,255,255,0.2)] text-white">
-                    WeChat — China&apos;s WhatsApp &amp; Facebook Combined
+                    WeChat — China&apos;s WhatsApp &amp; Messenger &amp; Everything App Combined.
                   </span>
                 </div>
               </div>
@@ -192,7 +192,7 @@ export function PhilosophySection() {
         <div className="text-center">
           <p className="text-xs uppercase tracking-widest text-muted-foreground">Why Chinese Buyers Are Different</p>
           <p className="mt-8 text-muted-foreground text-3xl text-center leading-relaxed">
-            Chinese buyers don&apos;t search on Google, scroll Instagram, or browse Facebook to find property. They live on REDNote and WeChat. Places where most Australian local agents have never been on or even heard of.
+            Chinese buyers don&apos;t search on Google, scroll Instagram, or browse Facebook to find property. They live on REDNote and WeChat. These are places that most Australian local agents have never been on or even heard of.
           </p>
           <p className="mt-6 text-foreground text-3xl text-center font-medium leading-relaxed">
             FANG.COM.AU is your direct line into that world.
@@ -204,7 +204,7 @@ export function PhilosophySection() {
       <div className="hidden md:grid grid-cols-4 border-t border-border">
         {[
           { label: "Registered Members", value: "1.4M" },
-          { label: "Daily Active Users", value: "320K" },
+          { label: "Monthly Active Users", value: "250K" },
           { label: "Total Network Audience", value: "3.5M" },
           { label: "Years in Market", value: "5+" },
         ].map((stat, i) => (

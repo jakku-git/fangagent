@@ -9,9 +9,10 @@ import type { Invoice } from "@/lib/supabase/types";
 import Link from "next/link";
 import { ArrowRight, TrendingUp, Eye, MessageSquare, Bookmark, AlertCircle } from "lucide-react";
 
+const supabase = createClient();
+
 export default function PortalDashboard() {
   const { user, profile, listings } = useAuth();
-  const supabase = createClient();
   const [unpaidInvoices, setUnpaidInvoices] = useState<Invoice[]>([]);
 
   useEffect(() => {
@@ -22,7 +23,8 @@ export default function PortalDashboard() {
       .eq("agent_id", user.id)
       .eq("status", "unpaid")
       .then(({ data }) => setUnpaidInvoices((data as Invoice[]) ?? []));
-  }, [user, supabase]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user]);
 
   const myListings = listings.filter((l) => l.agent_id === user?.id);
   const liveListings = myListings.filter((l) => l.status === "live");

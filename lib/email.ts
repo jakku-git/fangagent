@@ -83,6 +83,9 @@ export async function sendInvoiceEmail(data: {
   package: string;
   amount: number;
   dueDate: string;
+  originalAmount?: number;
+  discountPercent?: number;
+  promoCode?: string | null;
 }) {
   const firstName = data.agentName.split(" ")[0];
   return resend.emails.send({
@@ -105,7 +108,9 @@ export async function sendInvoiceEmail(data: {
         row("Listing Ref", data.listingRef) +
         row("Property", `${data.address}, ${data.suburb}`) +
         row("Package", data.package) +
-        row("Amount", `$${data.amount} inc. GST`) +
+        (data.originalAmount && data.discountPercent ? row("Original Price", `<span style="text-decoration:line-through">$${data.originalAmount}</span>`) : "") +
+        (data.promoCode ? row("Promo Code", `${data.promoCode} (${data.discountPercent}% off)`) : "") +
+        row("Amount Due", `<strong>$${data.amount} inc. GST</strong>`) +
         row("Due Date", data.dueDate)
       ))}
       <div style="background:#fffbeb;border:1px solid #fde68a;border-radius:12px;padding:20px 24px;margin:20px 0">

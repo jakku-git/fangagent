@@ -13,13 +13,14 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 
+const supabase = createClient();
+
 type RequestType = "edit" | "withdrawal";
 
 export default function ListingDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
   const { listings, user } = useAuth();
   const listing = listings.find((l) => l.id === id);
-  const supabase = createClient();
 
   // Requests state
   const [requests, setRequests] = useState<ListingRequest[]>([]);
