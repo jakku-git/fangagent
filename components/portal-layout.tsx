@@ -25,12 +25,11 @@ export function PortalLayout({ children }: { children: React.ReactNode }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(() => {
-    if (!isLoading && !user) {
-      router.replace("/login");
-    }
-    // Only redirect once profile is loaded and role is confirmed wrong
-    if (!isLoading && user && profile && profile.role !== "agent") {
-      router.replace("/login");
+    if (isLoading) return;
+    if (!user) { router.replace("/login"); return; }
+    // Only redirect staff once profile is confirmed — don't redirect if profile is still null
+    if (profile && profile.role === "staff") {
+      router.replace("/staff");
     }
   }, [user, profile, isLoading, router]);
 

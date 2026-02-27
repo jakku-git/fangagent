@@ -1,9 +1,12 @@
 "use client";
 
-import { createContext, useContext, useState, useEffect, ReactNode, useCallback } from "react";
+import { createContext, useContext, useState, useEffect, ReactNode } from "react";
 import { createClient } from "@/lib/supabase/client";
 import type { Profile, Listing } from "@/lib/supabase/types";
 import type { User } from "@supabase/supabase-js";
+
+// Singleton client — never recreated on re-render, so auth state is stable
+const supabase = createClient();
 
 interface AuthContextType {
   user: User | null;
@@ -19,23 +22,23 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | null>(null);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-  const supabase = createClient();
   const [user, setUser] = useState<User | null>(null);
   const [profile, setProfile] = useState<Profile | null>(null);
   const [listings, setListings] = useState<Listing[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  const fetchProfile = useCallback(async (userId: string) => {
-    const { data } = await supabase
+  async function fetchProfile(userId: string): Promise<Profile | null> {
+    const { data, error } = await supabase
       .from("profiles")
       .select("*")
       .eq("id", userId)
       .single();
-    setProfile(data ?? null);
-    return data as Profile | null;
-  }, [supabase]);
+    if (error) console.error("[auth] fetchProfile error:", error.message);
+    setProfile((data as Profile) ?? null);
+    return (data as Profile) ?? null;
+  }
 
-  const fetchListings = useCallback(async (userId: string, role: string) => {
+  async function fetchListings(userId: string, role: string) {
     let query = supabase
       .from("listings")
       .select("*, listing_photos(*)")
@@ -45,52 +48,53 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       query = query.eq("agent_id", userId);
     }
 
-    const { data } = await query;
+    const { data, error } = await query;
+    if (error) console.error("[auth] fetchListings error:", error.message);
     setListings((data as Listing[]) ?? []);
-  }, [supabase]);
+  }
 
   useEffect(() => {
-    let initialised = false;
+    // onAuthStateChange fires immediately with INITIAL_SESSION (or SIGNED_OUT)
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      async (event, session) => {
+        setUser(session?.user ?? null);
 
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (_event, session) => {
-      setUser(session?.user ?? null);
-      if (session?.user) {
-        const p = await fetchProfile(session.user.id);
-        if (p) await fetchListings(session.user.id, p.role);
-      } else {
-        setProfile(null);
-        setListings([]);
-      }
-      // Mark loading done after the first event (covers both cold-start and post-login)
-      if (!initialised) {
-        initialised = true;
+        if (session?.user) {
+          const p = await fetchProfile(session.user.id);
+          if (p) await fetchListings(session.user.id, p.role);
+        } else {
+          setProfile(null);
+          setListings([]);
+        }
+
         setIsLoading(false);
       }
-    });
-
-    // Kick off by checking the current session — this fires onAuthStateChange with INITIAL_SESSION
-    supabase.auth.getSession();
+    );
 
     return () => subscription.unsubscribe();
-  }, [fetchProfile, fetchListings, supabase]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   async function login(email: string, password: string) {
     const { data, error } = await supabase.auth.signInWithPassword({ email, password });
     if (error) return { success: false, error: error.message };
 
     // Fetch profile immediately so the login page can redirect based on role
-    const { data: profileData } = await supabase
+    const { data: profileData, error: profileError } = await supabase
       .from("profiles")
       .select("role")
       .eq("id", data.user.id)
       .single();
 
-    // If no profile row yet (account created before trigger was set up), create one
+    if (profileError) console.error("[auth] login profile fetch error:", profileError.message);
+
+    // If no profile row yet, create one
     if (!profileData) {
       await supabase.from("profiles").insert({
         id: data.user.id,
         role: "agent",
         full_name: data.user.user_metadata?.full_name ?? "",
+        email: data.user.email ?? "",
       });
     }
 
@@ -99,7 +103,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   async function logout() {
     try {
-      // Race signOut against a 5s timeout — the lock can hang if multiple tabs are open
       await Promise.race([
         supabase.auth.signOut(),
         new Promise<void>((_, reject) =>
@@ -107,8 +110,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         ),
       ]);
     } catch {
-      // Lock timed out or signOut failed — manually clear all Supabase auth storage
-      // so the user is effectively logged out in this tab regardless
+      // Lock timed out — manually clear auth storage so user is logged out in this tab
       const prefix = "sb-ljbajzpevhwgtkpdcllf-auth";
       Object.keys(localStorage)
         .filter((k) => k.startsWith(prefix))
@@ -117,7 +119,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         .filter((k) => k.startsWith(prefix))
         .forEach((k) => sessionStorage.removeItem(k));
     } finally {
-      // Always clear local state and redirect
       setUser(null);
       setProfile(null);
       setListings([]);
