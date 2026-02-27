@@ -213,7 +213,7 @@ export default function SupportPage() {
   const [showModal, setShowModal] = useState(false);
   return (
     <PageLayout>
-      {showModal && <SupportModal onClose={() => setShowModal(false)} />
+      {showModal && <SupportModal onClose={() => setShowModal(false)} />}
       {/* Hero */}
       <section className="border-b border-border">
         <div className="mx-auto max-w-6xl px-6 py-24 md:py-36">
