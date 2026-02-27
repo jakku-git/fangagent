@@ -7,16 +7,16 @@ const milestones = [
   { year: "2021", event: "Became one of Australia's only officially verified real estate WeChat Official Accounts." },
   { year: "2022", event: "Joined MediaToday Group — Australia's largest Chinese media company." },
   { year: "2023", event: "Became an official REDNote (小红书) marketing partner for real estate in Australia." },
-  { year: "2024", event: "Surpassed 1.4 million registered members and 320,000 daily active users." },
+  { year: "2024", event: "Surpassed 1.4 million registered members and 200,000 monthly active users." },
   { year: "2025", event: "Expanded network reach to 3.5 million across the full MediaToday ecosystem." },
 ];
 
 const brands = [
-  { name: "Sydney Today", desc: "Australia's most-read Chinese news publication. 870,000+ daily readers." },
+  { name: "Sydney Today", desc: "Australia's most-read Chinese news publication. 870,000+ users, 320K+ daily readers." },
   { name: "QLD Today", desc: "Queensland's leading Chinese-language news and lifestyle platform." },
   { name: "WA Today", desc: "Western Australia's primary Chinese digital media outlet." },
   { name: "Melbourne Today", desc: "Melbourne's Chinese community news and events platform." },
-  { name: "uMall", desc: "Australia's largest Chinese-language online marketplace." },
+  { name: "UMall", desc: "Australia's largest Chinese-language online marketplace." },
   { name: "到家", desc: "Home services platform connecting Chinese households with local providers." },
 ];
 
@@ -68,7 +68,7 @@ export default function AboutPage() {
         <div className="mx-auto grid max-w-6xl grid-cols-2 divide-x divide-background/10 md:grid-cols-4">
           {[
             { value: "1.4M", label: "Registered Members" },
-            { value: "250K", label: "Monthly Active Users" },
+            { value: "200K", label: "Monthly Active Users" },
             { value: "3.5M", label: "Total Network Reach" },
             { value: "5+", label: "Years in Market" },
           ].map((stat) => (

@@ -9,7 +9,7 @@ const platformStats = [
     platform: "Fang Property Portal",
     metrics: [
       { label: "Registered Members", value: "1.4M" },
-      { label: "Monthly Active Users", value: "250K" },
+      { label: "Monthly Active Users", value: "200K" },
       { label: "Overall Network Reach", value: "4.2M+" },
       { label: "Avg. Session Duration", value: "6.4 min" },
     ],
@@ -38,7 +38,7 @@ const platformStats = [
   {
     platform: "SydneyToday (MediaToday)",
     metrics: [
-      { label: "Daily Readers", value: "60K+" },
+      { label: "Daily Readers", value: "320K+" },
       { label: "Total Network Reach", value: "3.5M" },
       { label: "Publications", value: "6 cities" },
       { label: "Language", value: "Chinese" },
@@ -217,7 +217,7 @@ export default function MediaKitPage() {
             { value: "3.5M", label: "Total Network Reach" },
             { value: "1.4M", label: "Registered Members" },
             { value: "1.2M", label: "WeChat Followers" },
-            { value: "60K+", label: "Daily News Readers" },
+            { value: "320K+", label: "Daily News Readers" },
           ].map((stat) => (
             <div key={stat.label} className="px-8 py-12 text-center">
               <p className="text-4xl font-medium md:text-5xl">{stat.value}</p>

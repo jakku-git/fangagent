@@ -34,7 +34,7 @@ const features: (Omit<ChannelDetail, "color"> & { description: string; detail: s
         { label: "Registered Users", value: "300M+" },
         { label: "Daily Active Users", value: "100M+" },
         { label: "Fang REDNote Accounts", value: "10–12" },
-        { label: "Avg. Post Reach", value: "50K+" },
+        { label: "Avg. Post Reach", value: "2K–3K" },
       ],
       whyFang: [
         {
@@ -59,8 +59,8 @@ const features: (Omit<ChannelDetail, "color"> & { description: string; detail: s
   },
   {
     title: "WeChat — China's Everything App",
-    subtitle: "1.3B active users worldwide",
-    description: "1.3B active users worldwide",
+    subtitle: "1.4B active users worldwide",
+    description: "1.4B active users worldwide",
     detail: "WeChat is how Chinese communities message, pay, read news, and discover businesses — all in one app. We hold one of the only officially verified real estate accounts in all of Australia.",
     image: "/media/images/wechat_officialaccount.webp",
     portrait: true,
@@ -72,17 +72,17 @@ const features: (Omit<ChannelDetail, "color"> & { description: string; detail: s
     color: "",
     modal: {
       title: "WeChat — China's Everything App",
-      subtitle: "1.3B active users worldwide",
+      subtitle: "1.4B active users worldwide",
       image: "/media/images/wechat_officialaccount.webp",
       color: "#07C160",
       hook: "WeChat is not a messaging app. It is the operating system of Chinese daily life — and it is where every Chinese buyer in Australia spends hours every single day.",
       body: [
-        "WeChat (微信) has 1.3 billion monthly active users worldwide. In Australia, it is used by virtually every Chinese resident — not just for messaging friends and family, but for paying bills, reading the news, joining community groups, following businesses, and consuming content. It is the single most penetrated digital platform in the Chinese Australian community.",
+        "WeChat (微信) has 1.4 billion monthly active users worldwide. In Australia, it is used by virtually every Chinese resident — not just for messaging friends and family, but for paying bills, reading the news, joining community groups, following businesses, and consuming content. It is the single most penetrated digital platform in the Chinese Australian community.",
         "Unlike Instagram or Facebook, WeChat is a closed ecosystem. You cannot discover accounts without being introduced or searching deliberately. This makes organic reach nearly impossible for most businesses — but it makes a verified Official Account with a large following extraordinarily valuable, because that audience is genuinely opted in.",
         "Direct real estate advertising is explicitly banned on WeChat. Sponsored posts, banner ads, and promotional pop-ups are all prohibited by platform policy. The only effective way to reach buyers on WeChat is through authentic, editorial-style content published by a trusted, verified account — exactly what Fang provides.",
       ],
       stats: [
-        { label: "Monthly Active Users", value: "1.3B" },
+        { label: "Monthly Active Users", value: "1.4B" },
         { label: "Fang Follower Network", value: "1.2M+" },
         { label: "NSW Metro Coverage", value: "100%" },
         { label: "Verified RE Accounts in AU", value: "One of few" },
@@ -112,7 +112,7 @@ const features: (Omit<ChannelDetail, "color"> & { description: string; detail: s
     title: "Fang Property Portal",
     subtitle: "Australia's #1 Chinese property app",
     description: "Australia's #1 Chinese property app",
-    detail: "Our dedicated property platform is built entirely in Chinese, with 1.4 million registered members and 320,000 daily active users.",
+    detail: "Our dedicated property platform is built entirely in Chinese, with 1.4 million registered members and 200,000 monthly active users.",
     image: "/media/images/fangmobile.webp",
     portrait: true,
     hook: "",
@@ -130,11 +130,11 @@ const features: (Omit<ChannelDetail, "color"> & { description: string; detail: s
       body: [
         "The Fang.com.au portal and mobile app is the first and most established Chinese-language real estate platform in Australia, founded in 2021. Every element of the platform — listings, suburb data, search filters, school information, auction results — is presented in Chinese, by Chinese property specialists, for a Chinese-speaking audience.",
         "This matters because Chinese buyers don't just need translation. They need context. They want to know which suburbs have Chinese-speaking schools nearby, which areas have established Chinese communities, what the flood zone history looks like, what similar properties have sold for in the same area. The Fang portal provides all of this, in a format that feels native rather than translated.",
-        "With 1.4 million registered members and 320,000 daily active users, the Fang portal has more engaged Chinese property seekers than any other platform in Australia. Listings on Fang receive an average of 7,000+ monthly unique exposures and 1,600+ monthly clicks — with buyers spending an average of 17 minutes per session.",
+        "With 1.4 million registered members and 200,000 monthly active users, the Fang portal has more engaged Chinese property seekers than any other platform in Australia. Listings on Fang receive an average of 7,000+ monthly unique exposures and 1,600+ monthly clicks — with buyers spending an average of 17 minutes per session.",
       ],
       stats: [
         { label: "Registered Members", value: "1.4M" },
-        { label: "Monthly Active Users", value: "250K" },
+        { label: "Monthly Active Users", value: "200K" },
         { label: "Avg. Monthly Clicks", value: "1,600+" },
         { label: "Avg. Session Time", value: "17 min" },
       ],
@@ -161,8 +161,8 @@ const features: (Omit<ChannelDetail, "color"> & { description: string; detail: s
   },
   {
     title: "Sydney Today — The Chinese Daily",
-    subtitle: "870,000+ daily readers",
-    description: "870,000+ daily readers",
+    subtitle: "320K+ daily readers",
+    description: "320K+ daily readers",
     detail: "Sydney Today is the most-read Chinese news publication in Australia — the Chinese-language equivalent of the Sydney Morning Herald for this community.",
     image: "/media/images/sydneytoday.webp",
     portrait: true,
@@ -174,18 +174,18 @@ const features: (Omit<ChannelDetail, "color"> & { description: string; detail: s
     color: "",
     modal: {
       title: "Sydney Today — The Chinese Daily",
-      subtitle: "870,000+ daily readers",
+      subtitle: "320K+ daily readers",
       image: "/media/images/sydneytoday.webp",
       color: "#E63946",
       hook: "Think of Sydney Today as the Chinese-language Sydney Morning Herald. It's the first thing hundreds of thousands of Chinese Australians read every morning — and it's where your listing becomes news.",
       body: [
-        "Sydney Today is Australia's most-read Chinese-language digital publication, part of the MediaToday Group network. With over 870,000 daily readers and 200,000+ daily active users on the Australia Today app and website, it sits at the centre of Chinese Australian media consumption.",
+        "Sydney Today is Australia's most-read Chinese-language digital publication, part of the MediaToday Group network. With over 320,000 daily readers and 870,000+ total users across the Australia Today app and website, it sits at the centre of Chinese Australian media consumption.",
         "A feature in Sydney Today is not an advertisement — it's editorial coverage. When your property appears in Sydney Today, it's presented as content worth reading, not a listing worth scrolling past. This framing dramatically changes how Chinese buyers respond to it: they engage, they share, and they enquire.",
         "MediaToday Group also operates Melbourne Today, QLD Today, WA Today, and Adelaide Today — five city-specific publications that together cover the major Chinese communities in every capital city in Australia. A Sydney Today feature can be extended across the full network for maximum national reach.",
       ],
       stats: [
-        { label: "Daily Readers", value: "870K+" },
-        { label: "Daily Active App Users", value: "200K+" },
+        { label: "Daily Readers", value: "320K+" },
+        { label: "Total Platform Users", value: "870K+" },
         { label: "Cities Covered", value: "5" },
         { label: "Verified Households", value: "30K+" },
       ],
@@ -282,7 +282,7 @@ const features: (Omit<ChannelDetail, "color"> & { description: string; detail: s
       hook: "Fang doesn't operate as a standalone portal. It is part of Australia's largest Chinese media empire — giving your listing access to an ecosystem that reaches 3.5 million people.",
       body: [
         "MediaToday Group (今日澳洲) was established in April 2010 and has grown to become the most influential Chinese media company in Australia. The group serves approximately 1.2 million Chinese residents in Australia through a multi-platform, multi-city network that spans news, e-commerce, lifestyle, and real estate.",
-        "The group operates five city-specific digital publications — Sydney Today, Melbourne Today, QLD Today, WA Today, and Adelaide Today — alongside vertical platforms including Fang (real estate), uMall (e-commerce with 1,500+ daily orders), and several lifestyle and health verticals. Together, these platforms create a total audience reach of 3.5 million people.",
+        "The group operates five city-specific digital publications — Sydney Today, Melbourne Today, QLD Today, WA Today, and Adelaide Today — alongside vertical platforms including Fang (real estate), UMall (e-commerce with 1,500+ daily orders), and several lifestyle and health verticals. Together, these platforms create a total audience reach of 3.5 million people.",
         "MediaToday has won multiple awards including recognition as a finalist for the 2023 NSW Premier's Multicultural Communications Award. Its dual-platform strategy — combining dedicated apps with WeChat distribution — represents the gold standard in how Chinese-language media operates in Australia.",
       ],
       stats: [
@@ -297,8 +297,8 @@ const features: (Omit<ChannelDetail, "color"> & { description: string; detail: s
           text: "Because Fang sits within the MediaToday Group, a single listing campaign can be amplified across real estate, news, lifestyle, and e-commerce channels simultaneously — reaching Chinese buyers at every touchpoint.",
         },
         {
-          heading: "uMall Integration",
-          text: "MediaToday's uMall platform generates 1,500+ orders daily from Chinese-Australian households. This gives Fang access to an e-commerce audience that is highly active, high-intent, and deeply embedded in the Chinese-Australian consumer ecosystem.",
+          heading: "UMall Integration",
+          text: "MediaToday's UMall platform generates 1,500+ orders daily from Chinese-Australian households. This gives Fang access to an e-commerce audience that is highly active, high-intent, and deeply embedded in the Chinese-Australian consumer ecosystem.",
         },
         {
           heading: "National Coverage Through City Networks",

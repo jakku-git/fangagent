@@ -2,11 +2,11 @@ import { PageLayout } from "@/components/page-layout";
 
 const audienceStats = [
   { value: "1.4M", label: "Registered Members", detail: "Active accounts on fang.com.au" },
-  { value: "250K", label: "Monthly Active Users", detail: "People actively searching every month" },
+  { value: "200K", label: "Monthly Active Users", detail: "People actively searching every month" },
   { value: "3.5M", label: "Total Network Reach", detail: "Across the MediaToday ecosystem" },
   { value: "1.2M", label: "WeChat Followers", detail: "Direct inbox access" },
   { value: "300M+", label: "REDNote Global Users", detail: "Platform we have official access to" },
-  { value: "870K+", label: "SydneyToday Daily Readers", detail: "Chinese news audience in Australia" },
+  { value: "320K+", label: "SydneyToday Daily Readers", detail: "Chinese news audience in Australia" },
 ];
 
 const demographics = [
@@ -66,7 +66,7 @@ const platforms = [
   {
     name: "SydneyToday",
     role: "Awareness & News",
-    desc: "The Chinese-language equivalent of the Sydney Morning Herald. Property news, suburb spotlights, and market commentary reach 870,000+ daily readers who trust this source.",
+    desc: "The Chinese-language equivalent of the Sydney Morning Herald. Property news, suburb spotlights, and market commentary reach 320,000+ daily readers across Australia's most trusted Chinese news platform.",
   },
 ];
 

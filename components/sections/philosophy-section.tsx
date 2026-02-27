@@ -169,7 +169,7 @@ export function PhilosophySection() {
         <div className="grid grid-cols-2 border-t border-border">
           {[
             { label: "Registered Members", value: "1.4M" },
-            { label: "Monthly Active Users", value: "250K" },
+            { label: "Monthly Active Users", value: "200K" },
             { label: "Total Network Audience", value: "3.5M" },
             { label: "Years in Market", value: "5+" },
           ].map((stat, i) => (
@@ -204,7 +204,7 @@ export function PhilosophySection() {
       <div className="hidden md:grid grid-cols-4 border-t border-border">
         {[
           { label: "Registered Members", value: "1.4M" },
-          { label: "Monthly Active Users", value: "250K" },
+          { label: "Monthly Active Users", value: "200K" },
           { label: "Total Network Audience", value: "3.5M" },
           { label: "Years in Market", value: "5+" },
         ].map((stat, i) => (

@@ -11,7 +11,7 @@ const packages = [
     name: "Essential",
     tagline: "Get found where Chinese buyers search.",
     description:
-      "Your property listed directly on fang.com.au — Australia's #1 Chinese real estate portal — with 1.4 million registered members and 320,000 daily active users. We handle everything: full Chinese translation, content localisation for the Chinese audience, and suburb-level data so buyers can make informed decisions without needing to speak English.",
+      "Your property listed directly on fang.com.au — Australia's #1 Chinese real estate portal — with 1.4 million registered members and 200,000 monthly active users. We handle everything: full Chinese translation, content localisation for the Chinese audience, and suburb-level data so buyers can make informed decisions without needing to speak English.",
     includes: [
       "Listed on fang.com.au web & app",
       "Full Chinese translation of your listing",
