@@ -28,14 +28,27 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [isLoading, setIsLoading] = useState(true);
 
   async function fetchProfile(userId: string): Promise<Profile | null> {
-    const { data, error } = await supabase
-      .from("profiles")
-      .select("*")
-      .eq("id", userId)
-      .single();
-    if (error) console.error("[auth] fetchProfile error:", error.message);
-    setProfile((data as Profile) ?? null);
-    return (data as Profile) ?? null;
+    // Retry once on lock timeout — the second attempt usually succeeds
+    for (let attempt = 0; attempt < 2; attempt++) {
+      const { data, error } = await supabase
+        .from("profiles")
+        .select("*")
+        .eq("id", userId)
+        .single();
+      if (!error) {
+        setProfile((data as Profile) ?? null);
+        return (data as Profile) ?? null;
+      }
+      if (attempt === 0 && error.message.includes("LockManager")) {
+        // Brief pause before retry
+        await new Promise((r) => setTimeout(r, 500));
+        continue;
+      }
+      console.error("[auth] fetchProfile error:", error.message);
+      break;
+    }
+    setProfile(null);
+    return null;
   }
 
   async function fetchListings(userId: string, role: string) {
@@ -48,9 +61,20 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       query = query.eq("agent_id", userId);
     }
 
-    const { data, error } = await query;
-    if (error) console.error("[auth] fetchListings error:", error.message);
-    setListings((data as Listing[]) ?? []);
+    // Retry once on lock timeout
+    for (let attempt = 0; attempt < 2; attempt++) {
+      const { data, error } = await query;
+      if (!error) {
+        setListings((data as Listing[]) ?? []);
+        return;
+      }
+      if (attempt === 0 && error.message.includes("LockManager")) {
+        await new Promise((r) => setTimeout(r, 500));
+        continue;
+      }
+      console.error("[auth] fetchListings error:", error.message);
+      break;
+    }
   }
 
   useEffect(() => {
@@ -60,8 +84,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         setUser(session?.user ?? null);
 
         if (session?.user) {
+          // Derive role from JWT metadata first (no DB call) so layouts can
+          // redirect immediately, then fetch full profile in the background.
+          const jwtRole = (session.user.user_metadata?.role as string | undefined)
+            ?? (session.user.email?.endsWith("@fang.com.au") ? "staff" : "agent");
+
+          // Optimistically set a minimal profile so layouts don't redirect prematurely
+          setProfile((prev) => prev ?? { role: jwtRole } as unknown as Profile);
+
           const p = await fetchProfile(session.user.id);
           if (p) await fetchListings(session.user.id, p.role);
+          else await fetchListings(session.user.id, jwtRole);
         } else {
           setProfile(null);
           setListings([]);
@@ -79,26 +112,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const { data, error } = await supabase.auth.signInWithPassword({ email, password });
     if (error) return { success: false, error: error.message };
 
-    // Fetch profile immediately so the login page can redirect based on role
-    const { data: profileData, error: profileError } = await supabase
-      .from("profiles")
-      .select("role")
-      .eq("id", data.user.id)
-      .single();
+    // Read role from JWT user_metadata — no extra DB call, no lock contention.
+    // The register route and handle_new_user trigger both set this correctly.
+    const jwtRole = data.user.user_metadata?.role as string | undefined;
 
-    if (profileError) console.error("[auth] login profile fetch error:", profileError.message);
+    // For @fang.com.au accounts, always treat as staff regardless of metadata
+    const isStaffEmail = data.user.email?.toLowerCase().endsWith("@fang.com.au") ?? false;
+    const role = isStaffEmail ? "staff" : (jwtRole ?? "agent");
 
-    // If no profile row yet, create one
-    if (!profileData) {
-      await supabase.from("profiles").insert({
-        id: data.user.id,
-        role: "agent",
-        full_name: data.user.user_metadata?.full_name ?? "",
-        email: data.user.email ?? "",
-      });
-    }
-
-    return { success: true, role: profileData?.role ?? "agent" };
+    return { success: true, role };
   }
 
   async function logout() {
