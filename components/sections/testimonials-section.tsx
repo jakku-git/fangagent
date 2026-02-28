@@ -13,7 +13,7 @@ export function TestimonialsSection() {
       {/* Video */}
       <div className="w-full">
         <video
-          src="https://ljbajzpevhwgtkpdcllf.supabase.co/storage/v1/object/public/webm/fangexplainer.webm"
+          src="https://ljbajzpevhwgtkpdcllf.supabase.co/storage/v1/object/public/webm/footervideo.webm"
           autoPlay
           muted
           loop
